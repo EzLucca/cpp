@@ -8,7 +8,8 @@ int	main(int argc, char **argv)
 		for (int i = 1; i < argc; i++)
 		{
 			std::string str (argv[i]);
-			for ( std::string::iterator it=str.begin(); it!=str.end(); ++it)
+			// for ( std::string::iterator it=str.begin(); it!=str.end(); ++it)
+			for ( auto it = str.begin(); it != str.end(); ++it)
 				std::cout << static_cast<char>(toupper(static_cast<unsigned char>(*it)));
 		}
 		std::cout<< std::endl;

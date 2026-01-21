@@ -3,7 +3,9 @@ CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 GDBFLAGS 	:= -ggdb
 
 NAME     	:= phonebook
-SRC      	:= phonebook.cpp \
+SRC      	:= Phonebook.cpp \
+			   Contact.cpp \
+			   main.cpp
 
 INCLUDES 	:= -Iinclude
 OBJ      	:= $(SRC:.cpp=.o)
@@ -20,7 +22,7 @@ $(NAME): $(OBJ)
 
 gdb: CFLAGS += $(GDBFLAGS)
 gdb: re
-	@echo "🐞 Build with GDB symbols ready"
+	@echo "Build with GDB symbols ready"
 
 clean:
 	rm -rf $(OBJ)
@@ -31,5 +33,4 @@ fclean: clean
 re: fclean all
 
 .SECONDARY: $(OBJ)
-.SECONDARY: $(OBJ_BONUS)
 .PHONY: all clean fclean re

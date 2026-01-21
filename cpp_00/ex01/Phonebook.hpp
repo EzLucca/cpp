@@ -1,6 +1,7 @@
 #pragma once
 
-#include "class.Contact.hpp"
+#include <iostream>
+#include "Contact.hpp"
 
 class PhoneBook
 {
