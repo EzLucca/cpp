@@ -6,7 +6,7 @@
 class PhoneBook
 {
 	private:
-		Contact Contact[8];
+		Contact Contacts[8];
 		int	olds;
 	public:
 		int count;

@@ -2,7 +2,7 @@
 
 int main (void)
 {
-	// Phonebook book = Phonebook();
+	PhoneBook book = PhoneBook();
 	std::string command;
 	while(1)
 	{
@@ -10,18 +10,30 @@ int main (void)
 		if(!std::getline(std::cin, command))
 		{
 			std::cout << "\nEOF detected\n";
+break;
 		}
-		if(command == "ADD")
+		if(command == "ADD" || command == "add")
 		{
-			std::cout << "Add if\n";
+			book.addContact();
+			if (std::cin.eof())
+			{
+				std::cout << "EOF\n";
+				break;
+			}
 		}
-		else if(command == "SEARCH")
+		else if(command == "SEARCH" || command == "search")
 		{
-			std::cout << "search if\n";
+			book.searchContact();
+			if (std::cin.eof())
+			{
+				std::cout << "EOF\n";
+				break;
+			}
 		}
-		else if(command == "EXIT")
+		else if(command == "EXIT" || command == "exit")
 		{
-			std::cout << "exit if\n";
+			std::cout << "Closing phonebook...\n";
+			break;
 		}
 		else
 			std::cout << "Invalid command\n";

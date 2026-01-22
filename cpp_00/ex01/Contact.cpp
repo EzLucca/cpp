@@ -2,6 +2,15 @@
 #include <iostream>
 
 Contact::Contact(){};
+
+Contact::Contact(std::string name, std::string surname, std::string nick, std::string number, std::string secret)
+{
+	firstName = name;
+	lastName = surname;
+	nickName = nick;
+	phoneNumber = number;
+	darkSecret = secret;
+}
 const std::string& Contact::getFirstName() const { return firstName; }
 const std::string& Contact::getLastName() const { return firstName; }
 const std::string& Contact::getNickName() const { return firstName; }
