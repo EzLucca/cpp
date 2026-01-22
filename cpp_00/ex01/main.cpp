@@ -10,7 +10,7 @@ int main (void)
 		if(!std::getline(std::cin, command))
 		{
 			std::cout << "\nEOF detected\n";
-break;
+			break;
 		}
 		if(command == "ADD" || command == "add")
 		{
