@@ -9,7 +9,10 @@ int main (void)
 		std::cout << "Enter a command ADD, SEARCH or EXIT: ";
 		if(!std::getline(std::cin, command))
 		{
+			std::cout << "\n*******************************************\n";
 			std::cout << "\nEOF detected\n";
+			std::cout << "Closing phonebook...\n";
+			std::cout << "*******************************************\n";
 			break;
 		}
 		if(command == "ADD" || command == "add")

@@ -12,10 +12,10 @@ Contact::Contact(std::string name, std::string surname, std::string nick, std::s
 	darkSecret = secret;
 }
 const std::string& Contact::getFirstName() const { return firstName; }
-const std::string& Contact::getLastName() const { return firstName; }
-const std::string& Contact::getNickName() const { return firstName; }
-const std::string& Contact::getPhoneNumber() const { return firstName; }
-const std::string& Contact::getDarkSecret() const { return firstName; }
+const std::string& Contact::getLastName() const { return lastName; }
+const std::string& Contact::getNickName() const { return nickName; }
+const std::string& Contact::getPhoneNumber() const { return phoneNumber; }
+const std::string& Contact::getDarkSecret() const { return darkSecret; }
 
 void	Contact::printInfo() const
 {
