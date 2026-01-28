@@ -9,7 +9,7 @@ class PhoneBook
 		Contact Contacts[8];
 		int	olds;
 	public:
-		int count;
+ 		int count;
 		PhoneBook();
 		~PhoneBook();
 		void	addContact();

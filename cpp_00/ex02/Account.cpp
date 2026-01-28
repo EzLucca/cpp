@@ -1,10 +1,27 @@
 #include <iostream>
+#include <ctime>
 #include "Account.hpp"
+
+int	Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
 
 int	Account::getNbAccounts( void ) {return _nbAccounts ;}
 int	Account::getTotalAmount( void ){return _totalAmount ;};
 int	Account::getNbDeposits( void ){return _totalNbDeposits;};
 int	Account::getNbWithdrawals( void ){return _totalNbWithdrawals;};
+
+Account::Account( int initial_deposit )
+{
+	_displayTimestamp();
+	_accountIndex = _nbAccounts++;
+	_amount = initial_deposit;
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
+	_totalAmount += initial_deposit;
+	std::cout << "index:" << _accountIndex << ";amount:" << initial_deposit << ";created\n";
+}
 
 void	Account::displayAccountsInfos( void ){
 	_displayTimestamp();
@@ -55,4 +72,18 @@ int		Account::checkAmount( void ) const {
 
 void	Account::displayStatus( void ) const {
 	_displayTimestamp();
+}
+
+void	Account::_displayTimestamp(void)
+{
+	char	output[17];
+	time_t	timeCheck = std::time(NULL);
+	std::strftime(output, 17, "%Y%m%d_%H%M%S", std::localtime(&timeCheck));
+	std::cout << "[" << output << "] ";
+}
+
+Account::~Account()
+{
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";ammount:" << _amount << ";closed\n";
 }

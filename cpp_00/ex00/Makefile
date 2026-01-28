@@ -12,7 +12,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(C++) $(OBJ) -o $@
-	@clear
 	@echo "✅ Build $(NAME) successfully!"
 
 %.o: %.cpp 
