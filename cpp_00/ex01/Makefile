@@ -1,31 +1,30 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
-GDBFLAGS 	:= -ggdb
 
 NAME     	:= phonebook
 SRC      	:= Phonebook.cpp \
 			   Contact.cpp \
 			   main.cpp
 
+OBJ_DIR   	:= obj
+OBJ       	:= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+
 INCLUDES 	:= -Iinclude
-OBJ      	:= $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(C++) $(OBJ) -o $@
-	@clear
 	@echo "✅ Build $(NAME) successfully!"
 
-%.o: %.cpp 
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	@$(C++) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-gdb: CFLAGS += $(GDBFLAGS)
-gdb: re
-	@echo "Build with GDB symbols ready"
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
