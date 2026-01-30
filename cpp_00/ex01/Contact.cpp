@@ -9,13 +9,13 @@ Contact::Contact(std::string name, std::string surname, std::string nick, std::s
 	lastName = surname;
 	nickName = nick;
 	phoneNumber = number;
-	darkSecret = secret;
+	darkestSecret = secret;
 }
 const std::string& Contact::getFirstName() const { return firstName; }
 const std::string& Contact::getLastName() const { return lastName; }
 const std::string& Contact::getNickName() const { return nickName; }
 const std::string& Contact::getPhoneNumber() const { return phoneNumber; }
-const std::string& Contact::getDarkSecret() const { return darkSecret; }
+const std::string& Contact::getDarkestSecret() const { return darkestSecret; }
 
 void	Contact::printInfo() const
 {
@@ -23,6 +23,6 @@ void	Contact::printInfo() const
 	std:: cout << "Last name: " << getLastName() << std::endl;
 	std:: cout << "Nick name: " << getNickName() << std::endl;
 	std:: cout << "Phone number: " << getPhoneNumber() << std::endl;
-	std:: cout << "Dark secret: " << getDarkSecret() << std::endl;
+	std:: cout << "Dark secret: " << getDarkestSecret() << std::endl;
 }
 Contact::~Contact(){};

@@ -9,7 +9,7 @@ class Contact
 		std::string lastName;
 		std::string nickName;
 		std::string phoneNumber;
-		std::string darkSecret;
+		std::string darkestSecret;
 	public:
 		Contact();
 		Contact(std::string name, std::string surname, std::string nick, std::string phone, std::string secret);
@@ -17,7 +17,7 @@ class Contact
 		const std::string& getLastName() const;
 		const std::string& getNickName() const;
 		const std::string& getPhoneNumber() const;
-		const std::string& getDarkSecret() const;
+		const std::string& getDarkestSecret() const;
 		void printInfo() const;
 		~Contact();
 };

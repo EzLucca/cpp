@@ -4,7 +4,7 @@ CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 NAME     	:= megaphone
 SRC      	:= megaphone.cpp \
 
-OBJ_DIR   	:= obj
+OBJ_DIR   	:= .obj
 OBJ       	:= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 INCLUDES 	:= -Iinclude

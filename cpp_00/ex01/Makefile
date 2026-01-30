@@ -6,7 +6,7 @@ SRC      	:= Phonebook.cpp \
 			   Contact.cpp \
 			   main.cpp
 
-OBJ_DIR   	:= obj
+OBJ_DIR   	:= .obj
 OBJ       	:= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 INCLUDES 	:= -Iinclude

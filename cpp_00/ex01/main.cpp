@@ -15,7 +15,7 @@ int main (void)
 			std::cout << "*******************************************\n";
 			break;
 		}
-		if(command == "ADD" || command == "add")
+		if(command == "ADD")
 		{
 			book.addContact();
 			if (std::cin.eof())
@@ -24,7 +24,7 @@ int main (void)
 				break;
 			}
 		}
-		else if(command == "SEARCH" || command == "search")
+		else if(command == "SEARCH")
 		{
 			book.searchContact();
 			if (std::cin.eof())
@@ -33,7 +33,7 @@ int main (void)
 				break;
 			}
 		}
-		else if(command == "EXIT" || command == "exit")
+		else if(command == "EXIT")
 		{
 			std::cout << "Closing phonebook...\n";
 			break;
