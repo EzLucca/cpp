@@ -1,7 +1,7 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 
-NAME     	:= harl 
+NAME     	:= harlFilter 
 SRC      	:= main.cpp \
 			   Harl.cpp \
 
