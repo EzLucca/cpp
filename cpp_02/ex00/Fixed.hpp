@@ -5,7 +5,7 @@
 
 class Fixed {
 	private:
-		int _raw;
+		int _integer;
 		static const int _fraction = 8;
 
 	public:
