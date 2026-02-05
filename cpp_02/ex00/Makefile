@@ -1,7 +1,7 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 
-NAME     	:= zombie
+NAME     	:= fixedpoint
 SRC      	:= main.cpp \
 			   Fixed.cpp \
 
