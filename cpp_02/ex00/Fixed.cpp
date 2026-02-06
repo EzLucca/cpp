@@ -19,9 +19,9 @@ Fixed::Fixed(const Fixed& other) : _integer(other._integer){
 //Copy assignement constructor
 Fixed& Fixed::operator = (const Fixed& other){
 	std::cout << "Copy assignment operator called.\n";
-	if (this != &other)
+	if (this != &other) {
 		_integer = other.getRawBits();
-		// _integer = other._integer;
+	}
 	return (*this);
 }
 

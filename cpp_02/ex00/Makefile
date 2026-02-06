@@ -14,7 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(C++) $(OBJ) -o $@
-	@echo "✅ Build $(NAME) successfully!"
+	@echo "Build $(NAME) successfully!"
 
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	@$(C++) $(CFLAGS) $(INCLUDES) -c $< -o $@

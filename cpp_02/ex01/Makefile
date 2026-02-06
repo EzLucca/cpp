@@ -1,7 +1,7 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 
-NAME     	:= zombie
+NAME     	:= fixedpoint_ex01
 SRC      	:= main.cpp \
 			   Fixed.cpp \
 
@@ -14,7 +14,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(C++) $(OBJ) -o $@
-	@echo "✅ Build $(NAME) successfully!"
+	@echo "Build $(NAME) successfully!"
 
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	@$(C++) $(CFLAGS) $(INCLUDES) -c $< -o $@
