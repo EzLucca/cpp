@@ -25,16 +25,6 @@ Fixed& Fixed::operator = (const Fixed& other){
 	return (*this);
 }
 
-int	Fixed::getRawBits(void) const{
-	std::cout << "getRawBits member function called.\n";
-	return (_integer);
-}
-
-void	Fixed::setRawBits(int const raw){
-	std::cout << "setRawBits member function called.\n";
-	_integer = raw;
-}
-
 Fixed::Fixed(const int value) {
 	std::cout << "Int constructor called.\n";
 	if (value > MAX23BITS) {
@@ -59,19 +49,56 @@ Fixed::Fixed(const float value) {
 		_integer = roundf(MIN23BITS * (1 << _fractionbits));
 	}
 	else {
-	_integer = roundf(value * (1 <<  _fractionbits));
+		_integer = roundf(value * (1 <<  _fractionbits));
 	}
 }
 
-float Fixed::toFloat(void) const {
-	return (float)_integer / (1 << _fractionbits);
+// Member function
+int	Fixed::getRawBits(void) const{
+	std::cout << "getRawBits member function called.\n";
+	return (_integer);
 }
 
-int Fixed::toInt(void) const {
-	return _integer >> _fractionbits;
+void	Fixed::setRawBits(int const raw){
+	std::cout << "setRawBits member function called.\n";
+	_integer = raw;
 }
 
-std::ostream& operator<<(std::ostream& out, const Fixed& value) {
-	out << value.toFloat();
-	return out;
-}
+float Fixed::toFloat(void) const { return (float)_integer / (1 << _fractionbits); }
+
+int Fixed::toInt(void) const { return _integer >> _fractionbits; }
+
+// Comparison operators overload
+bool	Fixed::operator > (const Fixed& other) const { return (_integer > other.getRawBits()); };
+bool	Fixed::operator < (const Fixed& other) const { return (_integer < other.getRawBits()); };
+bool	Fixed::operator >= (const Fixed& other) const { return (_integer >= other.getRawBits()); };
+bool	Fixed::operator <= (const Fixed& other) const { return (_integer <= other.getRawBits()); };
+bool	Fixed::operator == (const Fixed& other) const { return (_integer == other.getRawBits()); };
+bool	Fixed::operator != (const Fixed& other) const { return (_integer != other.getRawBits()); };
+
+// Arithmetic operators overload
+Fixed Fixed::operator + (const Fixed& other) const { return (Fixed(this->toFloat() + other.toFloat())); };
+Fixed Fixed::operator - (const Fixed& other) const { return (Fixed(this->toFloat() - other.toFloat())); };
+Fixed Fixed::operator * (const Fixed& other) const { return (Fixed(this->toFloat() * other.toFloat())); };
+Fixed Fixed::operator / (const Fixed& other) const {
+	if (other. getRawBits() == 0) {
+
+		std::cerr << "Error. Division by zero.\n";
+		return (Fixed());
+	}
+	return (Fixed(this->toFloat() * other.toFloat()));
+};
+
+// Increment/decremente operators overload
+Fixed &Fixed::operator ++ (void) { _integer++; return (*this); };
+Fixed &Fixed::operator -- (void) { _integer--; return (*this); };
+Fixed Fixed::operator ++ (int) { Fixed value(*this); ++(*this); return (value); };
+Fixed Fixed::operator -- (int) { Fixed value(*this); --(*this); return (value); };
+
+// Static member function
+Fixed &Fixed::min(Fixed &a, Fixed &b) { return (a.operator<(b) ? a : b); };
+Fixed &Fixed::max(Fixed &a, Fixed &b) { return (a.operator>(b) ? a : b); };
+const Fixed &Fixed::min(const Fixed &a, const Fixed &b) { return (a.operator<(b) ? a : b); };
+const Fixed &Fixed::max(const Fixed &a, const Fixed &b) { return (a.operator>(b) ? a : b); };
+
+std::ostream& operator<<(std::ostream& out, const Fixed& value) { out << value.toFloat(); return out; }

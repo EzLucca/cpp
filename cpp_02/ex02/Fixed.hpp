@@ -19,7 +19,6 @@ class Fixed {
 		Fixed(const Fixed& other);
 		Fixed& operator = (const Fixed& other);
 		~Fixed();
-
 		// Member function
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
@@ -33,10 +32,10 @@ class Fixed {
 		bool	operator == (const Fixed& other) const;
 		bool	operator != (const Fixed& other) const;
 		// Arithmetic operators overload
-		Fixed& operator + (const Fixed& other) const;
-		Fixed& operator - (const Fixed& other) const;
-		Fixed& operator * (const Fixed& other) const;
-		Fixed& operator / (const Fixed& other) const;
+		Fixed operator + (const Fixed& other) const;
+		Fixed operator - (const Fixed& other) const;
+		Fixed operator * (const Fixed& other) const;
+		Fixed operator / (const Fixed& other) const;
 		// Increment/decremente operators overload
 		Fixed& operator ++ (void);
 		Fixed operator ++ (int);
