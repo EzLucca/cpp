@@ -1,9 +1,11 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 
-NAME     	:= zombie
+NAME     	:= fixedpoint_ex03
 SRC      	:= main.cpp \
 			   Fixed.cpp \
+			   Point.cpp \
+			   bsp.cpp \
 
 OBJ_DIR   	:= .obj
 OBJ       	:= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
@@ -14,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(C++) $(OBJ) -o $@
-	@echo "✅ Build $(NAME) successfully!"
+	@echo "Build $(NAME) successfully!"
 
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	@$(C++) $(CFLAGS) $(INCLUDES) -c $< -o $@
