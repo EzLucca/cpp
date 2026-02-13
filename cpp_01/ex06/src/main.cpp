@@ -24,19 +24,22 @@ int	main(int argc, char **argv) {
 			std::cout << "[ DEBUG ]\n";
 			speak.complain("DEBUG");
 			std::cout << "\n";
+			[[fallthrough]];
 		case 2:
 			std::cout << "[ INFO ]\n";
 			speak.complain("INFO");
 			std::cout << "\n";
+			[[fallthrough]];
 		case 3:
 			std::cout << "[ WARNING ]\n";
 			speak.complain("WARNING");
 			std::cout << "\n";
+			[[fallthrough]];
 		case 4:
 			std::cout << "[ ERROR ]\n";
 			speak.complain("ERROR");
 			break ;
-			default:
-				speak.complain("");
+		default:
+			speak.complain("");
 	}
 }
