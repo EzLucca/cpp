@@ -13,9 +13,9 @@ class Cat : public Animal{
 		Cat(std::string type);
 		Cat(const Cat &other);
 		Cat &operator=(const Cat &other);
-		~Cat(void) override;
+		virtual ~Cat(void);
 
-		void	makeSound(void) const override;
+		virtual void	makeSound(void) const;
 };
 
 #endif // CAT_HPP

@@ -1,17 +1,19 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror -Wshadow
 
-NAME     	:= DiamondTrap
+NAME     	:= Abstract_class 
 
 SRC_DIR		:= src
 INC_DIR		:= include
 OBJ_DIR   	:= obj
 
 SRC      	:= main.cpp \
-			   ClapTrap.cpp \
-			   ScavTrap.cpp \
-			   FragTrap.cpp \
-			   DiamondTrap.cpp \
+			   Animal.cpp \
+			   WrongAnimal.cpp \
+			   Cat.cpp \
+			   WrongCat.cpp \
+			   Dog.cpp \
+			   Brain.cpp \
 
 SRCS       := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ       	:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

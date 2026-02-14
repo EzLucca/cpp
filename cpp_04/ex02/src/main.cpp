@@ -10,7 +10,6 @@ int main(void) {
     std::cout << "[ Test 1: Subject default test ]"			 << std::endl;
     std::cout << "-----------------------------------------" << std::endl;
 
-    const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
 
@@ -20,10 +19,6 @@ int main(void) {
     std::cout << i->getType() << std::endl;
     i->makeSound();
 
-    std::cout << meta->getType() << std::endl;
-    meta->makeSound();
-
-    delete meta;
     delete j;
     delete i;
 

@@ -13,9 +13,9 @@ class Dog : public Animal {
 		Dog(std::string type);
 		Dog(const Dog &other);
 		Dog &operator=(const Dog &other);
-		~Dog(void) override;
+		virtual ~Dog(void);
 
-		void	makeSound(void) const override;
+		virtual void	makeSound(void) const;
 };
 
 #endif // DOG_HPP
