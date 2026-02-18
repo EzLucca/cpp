@@ -7,10 +7,14 @@ SRC_DIR		:= src
 INC_DIR		:= include
 OBJ_DIR   	:= obj
 
-SRC      	:= main.cpp \
-			   AMateria.cpp \
+SRC      	:= AMateria.cpp \
+			   Character.cpp \
+			   Cure.cpp \
 			   ICharacter.cpp \
 			   IMateriaSource.cpp \
+			   Ice.cpp \
+			   MateriaSource.cpp \
+			   main.cpp \
 
 SRCS       := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ       	:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

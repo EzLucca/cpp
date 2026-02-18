@@ -3,6 +3,12 @@
 
 #include "ClapTrap.hpp"
 
+/**
+ * @brief Class representing a ScavTrap robot.
+ *
+ * Inherits virtually from ClapTrap. ScavTraps have enhanced stats
+ * and a special "Gate Keeper" mode.
+ */
 class ScavTrap : virtual public ClapTrap {
 	private:
 

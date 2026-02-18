@@ -3,6 +3,13 @@
 
 #include "Animal.hpp"
 
+/**
+ * @class Cat
+ * @brief Represents a cat, derived from the Animal base class.
+ *
+ * The Cat class specializes the Animal class by providing
+ * a cat-specific implementation of the makeSound() method.
+ */
 class Cat : public Animal{
 	private:
 

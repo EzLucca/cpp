@@ -1,6 +1,16 @@
 #include "DiamondTrap.hpp"
 
-// Default constructor for DiamondTrap
+/**
+ * @brief Default constructor.
+ *
+ * Initializes a DiamondTrap with a default name.
+ * Stats are composed from parent classes:
+ * - hitPoints from FragTrap
+ * - energyPoints from ScavTrap
+ * - attackDamage from FragTrap
+ *
+ * The ClapTrap base name is set to "<DiamondName>_clap_name".
+ */
 DiamondTrap::DiamondTrap(void)
 	: _name("Default Diamond")
 {
@@ -11,7 +21,21 @@ DiamondTrap::DiamondTrap(void)
 	std::cout << "DiamondTrap Default constructor called.\n";
 }
 
-// Constructor with name as parameter
+/**
+ * @brief Constructor with name parameter.
+ *
+ * Initializes:
+ * - ClapTrap base with name + "_clap_name"
+ * - ScavTrap and FragTrap bases
+ * - DiamondTrap own name
+ *
+ * Stats are combined from parent classes:
+ * - hitPoints from FragTrap
+ * - energyPoints from ScavTrap
+ * - attackDamage from FragTrap
+ *
+ * @param name Name of the DiamondTrap.
+ */
 DiamondTrap::DiamondTrap(const std::string name)
 	: ClapTrap(name + "_clap_name"),
 	ScavTrap(name),
@@ -24,7 +48,13 @@ DiamondTrap::DiamondTrap(const std::string name)
 	std::cout << "DiamondTrap " << name << " constructor called.\n";
 }
 
-// copy constructor
+/**
+ * @brief Copy constructor.
+ *
+ * Copies all base class parts and the DiamondTrap name.
+ *
+ * @param other DiamondTrap instance to copy.
+ */
 DiamondTrap::DiamondTrap(const DiamondTrap &other)
 	: ClapTrap(other),
 	ScavTrap(other),
@@ -34,7 +64,15 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other)
 	std::cout << "DiamondTrap " << _name << " copy constructor called.\n";
 }
 
-// copy assignment operator
+/**
+ * @brief Copy assignment operator.
+ *
+ * Assigns the DiamondTrap name and uses ClapTrap assignment
+ * to copy shared base members.
+ *
+ * @param other DiamondTrap instance to assign from.
+ * @return Reference to this DiamondTrap.
+ */
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
 	if (this != &other) {
 		this->_name = other._name;
@@ -43,10 +81,22 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
 	return (*this);
 }
 
+/**
+ * @brief Destructor.
+ *
+ * Cleans up the DiamondTrap instance.
+ */
 DiamondTrap::~DiamondTrap(void) {
 	std::cout << "Diamond " << _name << " destructor called.\n";
 }
 
+/**
+ * @brief Displays the identity of the DiamondTrap.
+ *
+ * Prints:
+ * - The DiamondTrap's own name
+ * - The inherited ClapTrap base name
+ */
 void	DiamondTrap::whoAmI(void) {
 	std::cout << "DiamondTrap name: " <<_name << std::endl
 		<< "ClapTrap name: " << ClapTrap::_name << std::endl;

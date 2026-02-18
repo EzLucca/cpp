@@ -3,6 +3,13 @@
 
 #include "Animal.hpp"
 
+/**
+ * @class Dog
+ * @brief Represents a dog, derived from the Animal base class.
+ *
+ * The Dog class specializes the Animal class by providing
+ * a dog-specific implementation of the makeSound() method.
+ */
 class Dog : public Animal {
 	private:
 

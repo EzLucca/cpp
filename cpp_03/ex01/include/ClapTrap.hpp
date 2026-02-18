@@ -3,6 +3,12 @@
 
 #include <iostream>
 
+/**
+ * @brief Class representing a ClapTrap robot.
+ *
+ * ClapTrap objects have a name, hit points, energy points, and attack damage.
+ * They can attack, take damage, and repair themselves.
+ */
 class ClapTrap {
 	protected:
 		std::string		_name;

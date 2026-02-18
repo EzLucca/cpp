@@ -4,9 +4,21 @@
 #include <iostream>
 #include "ICharacter.hpp"
 
+/**
+ * @brief Abstract base class for all Materia types.
+ *
+ * AMateria represents a magical material that can be used
+ * by characters. It defines common behavior and attributes
+ * shared by all concrete Materia classes (such as Ice or Cure).
+ *
+ * This class is abstract:
+ * - It cannot be instantiated directly
+ * - Derived classes must implement the clone() method
+ */
 class AMateria {
 	protected:
-		std::string type;
+		std::string _type;
+
 	public:
 		AMateria(void);
 		AMateria(std::string const & type);

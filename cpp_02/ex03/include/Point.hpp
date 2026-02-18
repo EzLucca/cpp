@@ -3,6 +3,12 @@
 
 #include "Fixed.hpp"
 
+/**
+ * @brief Class representing a 2D point with fixed-point coordinates.
+ *
+ * Stores the x and y coordinates as Fixed objects. Coordinates are immutable
+ * after initialization.
+ */
 class Point {
 	private:
 		Fixed const _x;

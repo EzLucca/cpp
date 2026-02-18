@@ -3,6 +3,13 @@
 
 #include <iostream>
 
+/**
+ * @class WrongAnimal
+ * @brief Base class demonstrating incorrect use of polymorphism.
+ *
+ * The WrongAnimal class is similar to Animal but intentionally
+ * does not use virtual functions.
+ */
 class WrongAnimal {
 	protected:
 		std::string _type;

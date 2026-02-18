@@ -7,6 +7,13 @@
 #define MAX23BITS	8388607		
 #define MIN23BITS	-8388608	
 
+/**
+ * @brief Class representing a fixed-point number.
+ *
+ * Stores a fixed-point value internally as an integer with a fixed number
+ * of fractional bits. Provides constructors for int and float, as well as
+ * methods to convert back to float or int.
+ */
 class Fixed {
 	private:
 		int _integer;

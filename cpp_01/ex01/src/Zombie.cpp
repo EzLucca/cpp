@@ -1,17 +1,34 @@
 #include "Zombie.hpp"
 
+/**
+ * @brief Default constructor.
+ *
+ * Creates a Zombie with an empty name.
+ */
 Zombie::Zombie() {}
+
+/**
+ * @brief Constructor with a name.
+ *
+ * Initializes the Zombie with the given name.
+ *
+ * @param name The name of the Zombie.
+ */
 Zombie::Zombie(std::string name) : name(name) {}
 
-void	Zombie::announce() {
-	std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
+/**
+ * @brief Makes the Zombie announce itself.
+ */
+void Zombie::announce() const {
+    std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
 }
 
-void	Zombie::setname(std::string name) {
-	this->name = name;
-
-}
-
+/**
+ * @brief Destructor.
+ *
+ * Called when the Zombie is destroyed. Prints a message
+ * indicating that the Zombie was killed.
+ */
 Zombie::~Zombie() {
-	std::cout << "Zombie " << name <<  " was killed.\n";
+    std::cout << "Zombie " << name << " was killed.\n";
 }

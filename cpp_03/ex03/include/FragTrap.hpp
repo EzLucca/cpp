@@ -3,6 +3,12 @@
 
 #include "ClapTrap.hpp"
 
+/**
+ * @brief Class representing a FragTrap robot.
+ *
+ * Inherits virtually from ClapTrap. FragTraps have higher stats and 
+ * a special function to request high fives.
+ */
 class FragTrap : virtual public ClapTrap {
 	private:
 

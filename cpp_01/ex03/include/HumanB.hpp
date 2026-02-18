@@ -3,6 +3,12 @@
 
 #include "Weapon.hpp"
 
+/**
+ * @brief Class representing a human who can hold a weapon optionally.
+ *
+ * HumanB can exist without a weapon initially and can be assigned a weapon later
+ * using `setWeapon()`. The attack behavior depends on whether a weapon is assigned.
+ */
 class HumanB {
 	private:
 		std::string name;

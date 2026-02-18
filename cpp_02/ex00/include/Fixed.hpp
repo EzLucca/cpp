@@ -3,6 +3,12 @@
 
 #include <iostream>
 
+/**
+ * @brief Class representing a fixed-point number.
+ *
+ * Stores a fixed-point value internally as an integer with a fixed number
+ * of fractional bits. Provides access to the raw value and supports copying.
+ */
 class Fixed {
 	private:
 		int _integer;

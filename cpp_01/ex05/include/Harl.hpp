@@ -3,6 +3,12 @@
 
 #include <iostream>
 
+/**
+ * @brief Class representing a Harl who complains at different levels.
+ *
+ * Harl can complain at four levels: debug, info, warning, and error.
+ * The complain method selects the appropriate message based on the level string.
+ */
 class Harl {
 	private:
 		void debug(void);

@@ -3,6 +3,12 @@
 
 #include <iostream>
 
+/**
+ * @brief Class representing a weapon.
+ *
+ * A Weapon has a type (name) and can be modified after creation.
+ * Humans can hold or reference a Weapon to perform attacks.
+ */
 class Weapon {
 	private:
 		std::string type;

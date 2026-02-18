@@ -1,6 +1,11 @@
 #include "ScavTrap.hpp"
 
-// Default constructor calling ClapTrap
+/**
+ * @brief Default constructor.
+ *
+ * Calls ClapTrap default constructor, then sets ScavTrap-specific stats:
+ * hitPoints = 100, energyPoints = 50, attackDamage = 20.
+ */
 ScavTrap::ScavTrap(void) : ClapTrap() {
 	_hitPoints = 100;
 	_energyPoints = 50;
@@ -8,7 +13,14 @@ ScavTrap::ScavTrap(void) : ClapTrap() {
 	std::cout << "ScavTrap default constructor called.\n";
 }
 
-// Constructor ScavTrap with name variable
+/**
+ * @brief Constructor with a custom name.
+ *
+ * Calls ClapTrap constructor with name and sets ScavTrap-specific stats:
+ * hitPoints = 100, energyPoints = 50, attackDamage = 20.
+ *
+ * @param name Name of the ScavTrap.
+ */
 ScavTrap::ScavTrap(const std::string name)
 : ClapTrap(name) {
 	_hitPoints = 100;
@@ -17,13 +29,26 @@ ScavTrap::ScavTrap(const std::string name)
 	std::cout << "ScavTrap " << name << " constructor called.\n";
 }
 
-// Copy Constructor ScavTrap 
+/**
+ * @brief Copy constructor.
+ *
+ * Calls ClapTrap copy constructor.
+ *
+ * @param other ScavTrap instance to copy.
+ */
 ScavTrap::ScavTrap(const ScavTrap &other)
 : ClapTrap(other) {
 	std::cout << "ScavTrap copy constructor called.\n";
 }
 
-// Copy assignment operator ScavTrap using ClapTrap operator
+/**
+ * @brief Copy assignment operator.
+ *
+ * Uses ClapTrap assignment operator and outputs a message.
+ *
+ * @param other ScavTrap instance to assign from.
+ * @return Reference to this ScavTrap.
+ */
 ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 	if(this != &other) {
 		ClapTrap::operator=(other);
@@ -32,12 +57,23 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 	return(*this);
 }
 
-// Destructor of ScavTrap
+/**
+ * @brief Destructor.
+ *
+ * Cleans up the ScavTrap instance.
+ */
 ScavTrap::~ScavTrap(void) {
 	std::cout << "ScavTrap default destructor called for " << this->_name << std::endl;
 }
 
-// ScavTrap attack function
+/**
+ * @brief Makes the ScavTrap attack a target.
+ *
+ * Consumes 1 energy point. Cannot attack if hitPoints or energyPoints are 0.
+ * Overrides ClapTrap attack.
+ *
+ * @param target The name of the target to attack.
+ */
 void	ScavTrap::attack(const std::string& target) {
 	if (_hitPoints <= 0) {
 		std::cout << "ScavTrap " << _name
@@ -55,7 +91,11 @@ void	ScavTrap::attack(const std::string& target) {
 		<< ", causing " << _attackDamage << " points of damage!\n";
 }
 
-// ScavTrap specific function
+/**
+ * @brief Activates Gate Keeper mode.
+ *
+ * Prints a message indicating that ScavTrap is now in guard mode.
+ */
 void	ScavTrap::guardGate(void) {
 	std::cout << "ScavTrap " << _name << " invoke gate keeper mode.\n";
 }

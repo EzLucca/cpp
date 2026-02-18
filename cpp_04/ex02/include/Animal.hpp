@@ -3,6 +3,14 @@
 
 #include <iostream>
 
+/**
+ * @class Animal
+ * @brief Base class representing a generic animal.
+ *
+ * The Animal class serves as a base class for derived animal types.
+ * It stores the animal type and provides a virtual interface for
+ * making sounds.
+ */
 class Animal {
 	protected:
 		std::string _type;
