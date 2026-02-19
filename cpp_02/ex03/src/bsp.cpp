@@ -1,21 +1,34 @@
 #include "Point.hpp"
 
 /**
- * @brief Computes the cross product of vectors (p1-p3) and (p2-p3).
+ * @brief Computes the 2D cross product (orientation test) of vectors BP and BA.
  *
- * This is used to determine the relative orientation of three points
- * in 2D space. Positive result indicates one orientation, negative
- * another, and zero means the points are collinear.
+ * This function determines the relative position of point @p p with respect
+ * to the directed line formed by points @p a and @p b.
  *
- * @param p1 First point.
- * @param p2 Second point.
- * @param p3 Third point (common origin for the vectors).
- * @return Fixed The scalar cross product value.
+ * The result represents the signed area of the parallelogram defined by
+ * vectors (b → p) and (b → a):
+ * - Positive value  → point is on one side of the line
+ * - Negative value  → point is on the opposite side
+ * - Zero            → points are collinear
+ *
+ * This is commonly used for half-space classification in
+ * Binary Space Partitioning (BSP) and point-in-triangle tests.
+ *
+ * @param p The point to classify.
+ * @param a First point defining the line.
+ * @param b Second point defining the line (origin of vectors).
+ * @return Fixed Signed result of the 2D cross product.
  */
-static Fixed crossProduct(Point const p1, Point const p2, Point const p3)
+static Fixed crossProduct(Point const p, Point const a, Point const b)
 {
-	return (p1.getX() - p3.getX()) * (p2.getY() - p3.getY()) -
-		(p2.getX() - p3.getX()) * (p1.getY() - p3.getY());
+	Fixed x1 = p.getX() - b.getX();
+	Fixed y1 = p.getY() - b.getY();
+
+	Fixed x2 = a.getX() - b.getX();
+	Fixed y2 = a.getY() - b.getY();
+
+	return (x1 * y2) - (x2 * y1);
 }
 
 /**
