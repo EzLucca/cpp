@@ -17,7 +17,7 @@ class HumanB {
 	public:
 		HumanB(std::string nameB);
 		~HumanB();
-		void attack();
+		void	attack();
 		void	setWeapon(Weapon &weaponB);
 };
 

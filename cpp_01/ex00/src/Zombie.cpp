@@ -14,13 +14,13 @@ Zombie::Zombie() {}
  *
  * @param name The name of the Zombie.
  */
-Zombie::Zombie(std::string name) : name(name) {}
+Zombie::Zombie(std::string name) : _name(name) {}
 
 /**
  * @brief Makes the Zombie announce itself.
  */
 void Zombie::announce() const {
-    std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
+    std::cout << _name << ": BraiiiiiiinnnzzzZ...\n";
 }
 
 /**
@@ -30,5 +30,5 @@ void Zombie::announce() const {
  * indicating that the Zombie was killed.
  */
 Zombie::~Zombie() {
-    std::cout << "Zombie " << name << " was killed.\n";
+    std::cout << "Zombie " << _name << " was killed.\n";
 }

@@ -5,7 +5,7 @@
  *
  * Creates a Zombie with an empty name.
  */
-Zombie::Zombie() {}
+Zombie::Zombie(void) {}
 
 /**
  * @brief Constructor with a name.
@@ -20,15 +20,21 @@ Zombie::Zombie(std::string name) : name(name) {}
  * @brief Makes the Zombie announce itself.
  */
 void Zombie::announce() const {
-    std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
+	std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
 }
 
+/**
+ * @brief Set the name of each Zombie in the horde.
+ */
+void Zombie::setname(std::string name) {
+	this->name = name;
+}
 /**
  * @brief Destructor.
  *
  * Called when the Zombie is destroyed. Prints a message
  * indicating that the Zombie was killed.
  */
-Zombie::~Zombie() {
-    std::cout << "Zombie " << name << " was killed.\n";
+Zombie::~Zombie(void) {
+	std::cout << "Zombie " << name << " was killed.\n";
 }

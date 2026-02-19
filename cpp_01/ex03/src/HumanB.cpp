@@ -40,6 +40,7 @@ void HumanB::attack() {
     if (weapon == nullptr) {
         std::cout << name << " fail to attack.\n";
     } else {
-        std::cout << name << " attacks with the " << weapon->getType() << std::endl;
+        std::cout << name << " attacks with the "
+			<< weapon->getType() << std::endl;
     }
 }

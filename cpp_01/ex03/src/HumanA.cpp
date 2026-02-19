@@ -19,7 +19,8 @@ HumanA::HumanA(std::string nameA, Weapon &weaponA)
  * Prints an attack message including the human's name and the weapon type.
  */
 void HumanA::attack() {
-    std::cout << name << " attacks with the " << weapon.getType() << std::endl;
+    std::cout << name << " attacks with the "
+		<< weapon.getType() << std::endl;
 }
 
 /**

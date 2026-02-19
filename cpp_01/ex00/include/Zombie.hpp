@@ -11,18 +11,17 @@
  * Zombies can be created on the stack or the heap.
  */
 class Zombie {
-public:
-    Zombie();
-    Zombie(std::string name);
-    ~Zombie();
-	void announce(void) const;
+	private:
+		std::string _name;
+	public:
+		Zombie();
+		Zombie(std::string name);
+		~Zombie();
+		void announce(void) const;
 
-private:
-	std::string name;
 };
 
 Zombie* newZombie(std::string name);
-
 void	randomChump(std::string name);
 
 #endif // ZOMBIE_HPP
