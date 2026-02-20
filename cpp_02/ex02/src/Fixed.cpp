@@ -5,18 +5,14 @@
  *
  * Initializes the fixed-point number to 0 and prints a debug message.
  */
-Fixed::Fixed() : _integer(0) {
-	std::cout << "Default constructor called.\n";
-}
+Fixed::Fixed() : _integer(0) { }
 
 /**
  * @brief Destructor.
  *
  * Cleans up the Fixed instance and prints a debug message.
  */
-Fixed::~Fixed() {
-	std::cout << "Destructor is called.\n";
-}
+Fixed::~Fixed() { }
 
 /**
  * @brief Copy constructor.
@@ -25,9 +21,7 @@ Fixed::~Fixed() {
  *
  * @param other The Fixed instance to copy.
  */
-Fixed::Fixed(const Fixed& other) : _integer(other._integer){
-	std::cout << "Copy constructor called.\n";
-}
+Fixed::Fixed(const Fixed& other) : _integer(other._integer){ }
 
 /**
  * @brief Copy assignment operator.
@@ -38,7 +32,6 @@ Fixed::Fixed(const Fixed& other) : _integer(other._integer){
  * @return Reference to this Fixed instance.
  */
 Fixed& Fixed::operator = (const Fixed& other){
-	std::cout << "Copy assignment operator called.\n";
 	if (this != &other) {
 		_integer = other.getRawBits();
 	}
@@ -54,7 +47,6 @@ Fixed& Fixed::operator = (const Fixed& other){
  * @param value The integer value to convert.
  */
 Fixed::Fixed(const int value) {
-	std::cout << "Int constructor called.\n";
 	if (value > MAX23BITS) {
 		std::cout << "Number bigger than 23 bits. The max value will be saved.\n";
 		_integer = MAX23BITS << _fractionbits;
@@ -77,7 +69,6 @@ Fixed::Fixed(const int value) {
  * @param value The float value to convert.
  */
 Fixed::Fixed(const float value) {
-	std::cout << "Float constructor called.\n";
 	if (value > MAX23BITS) {
 		_integer = roundf(MAX23BITS * (1 << _fractionbits));
 	}
@@ -94,20 +85,14 @@ Fixed::Fixed(const float value) {
  *
  * @return The internal integer representing the fixed-point number.
  */
-int	Fixed::getRawBits(void) const{
-	std::cout << "getRawBits member function called.\n";
-	return (_integer);
-}
+int	Fixed::getRawBits(void) const{ return (_integer); }
 
 /**
  * @brief Sets the raw fixed-point value.
  *
  * @param raw The new integer value representing the fixed-point number.
  */
-void	Fixed::setRawBits(int const raw){
-	std::cout << "setRawBits member function called.\n";
-	_integer = raw;
-}
+void	Fixed::setRawBits(int const raw){ _integer = raw; }
 
 /**
  * @brief Converts the fixed-point value to a floating-point number.

@@ -10,7 +10,7 @@
  * vectors (b → p) and (b → a):
  * - Positive value  → point is on one side of the line
  * - Negative value  → point is on the opposite side
- * - Zero            → points are collinear
+ * - Zero            → points are on the line
  *
  * This is commonly used for half-space classification in
  * Binary Space Partitioning (BSP) and point-in-triangle tests.
@@ -50,6 +50,10 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 	Fixed d1 = crossProduct(point, a, b);
 	Fixed d2 = crossProduct(point, b, c);
 	Fixed d3 = crossProduct(point, c, a);
+
+	// std::cout << "\nvalue of d1: " << d1 << std::endl;
+	// std::cout << "value of d2: " << d2 << std::endl;
+	// std::cout << "value of d3: " << d3 << std::endl;
 
 	if (d1 == 0 || d2 == 0 || d3 == 0)
 		return false;
