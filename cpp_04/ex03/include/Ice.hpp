@@ -19,8 +19,8 @@ class Ice : public AMateria {
 		Ice &operator=(const Ice &other);
 		virtual ~Ice(void);
 
-		virtual AMateria* clone() const;
-		virtual void	use(ICharacter& target);
+		AMateria* clone() const override;
+		void	use(ICharacter& target) override;
 };
 
 #endif // ICE_HPP

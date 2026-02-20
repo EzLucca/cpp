@@ -14,12 +14,12 @@ class Character : public ICharacter {
 		Character(std::string const& name);
 		Character(const Character &other);
 		Character &operator=(const Character &other);
-		virtual ~Character(void);
+		~Character(void) override;
 
-		virtual std::string const&	getName() const;
-		virtual void	equip(AMateria* m);
-		virtual void	unequip(int idx);
-		virtual void	use(int idx, ICharacter& target);
+		std::string const&	getName() const override;
+		void	equip(AMateria* m) override;
+		void	unequip(int idx) override;
+		void	use(int idx, ICharacter& target) override;
 };
 
 #endif // CHARACTER_HPP

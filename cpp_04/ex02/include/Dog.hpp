@@ -20,9 +20,9 @@ class Dog : public Animal {
 		Dog(std::string type);
 		Dog(const Dog &other);
 		Dog &operator=(const Dog &other);
-		virtual ~Dog(void);
+		~Dog(void) override;
 
-		virtual void	makeSound(void) const;
+		void	makeSound(void) const override;
 };
 
 #endif // DOG_HPP

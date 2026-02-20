@@ -22,9 +22,9 @@ class Cat : public Animal{
 		Cat(std::string type);
 		Cat(const Cat &other);
 		Cat &operator=(const Cat &other);
-		virtual ~Cat(void);
+		~Cat(void) override;
 
-		virtual void	makeSound(void) const;
+		void	makeSound(void) const override;
 		// void	makeSound(void) const;
 };
 

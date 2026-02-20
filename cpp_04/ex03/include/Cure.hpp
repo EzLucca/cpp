@@ -17,10 +17,10 @@ class Cure : public AMateria {
 		Cure(void);
 		Cure(const Cure &other);
 		Cure &operator=(const Cure &other);
-		virtual ~Cure(void);
+		~Cure(void) override;
 
-		virtual AMateria* clone() const;
-		virtual void	use(ICharacter& target);
+		AMateria* clone() const override;
+		void	use(ICharacter& target) override;
 };
 
 #endif // CURE_HPP

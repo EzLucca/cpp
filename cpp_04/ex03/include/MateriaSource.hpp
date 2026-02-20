@@ -23,10 +23,10 @@ class MateriaSource : public IMateriaSource {
 		MateriaSource(void);
 		MateriaSource(const MateriaSource &other);
 		MateriaSource &operator=(const MateriaSource &other);
-		virtual ~MateriaSource(void);
+		~MateriaSource(void) override;
 
-		virtual void learnMateria(AMateria* m);
-		virtual	AMateria* createMateria(std::string const& type);
+		void learnMateria(AMateria* m) override;
+		AMateria* createMateria(std::string const& type) override;
 };
 
 #endif // MATERIASOURCE_HPP
