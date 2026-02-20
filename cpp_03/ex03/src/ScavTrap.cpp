@@ -75,6 +75,7 @@ ScavTrap::~ScavTrap(void) {
  * @param target The name of the target to attack.
  */
 void	ScavTrap::attack(const std::string& target) {
+	// std::cout << "Attack from ScavTrap\n";
 	if (_hitPoints <= 0) {
 		std::cout << "ScavTrap " << _name
 			<< " has no hitPoints. Cannot attack.\n";

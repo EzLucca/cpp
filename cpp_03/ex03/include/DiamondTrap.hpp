@@ -13,7 +13,7 @@
  */
 class DiamondTrap : public ScavTrap, public FragTrap {
 	private:
-		std::string _name;
+	std::string _name;
 
 	public:
 		// Canonical methods Constructor, copy, assignment and destructor
