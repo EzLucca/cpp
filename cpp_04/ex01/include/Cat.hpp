@@ -23,6 +23,7 @@ class Cat : public Animal{
 		~Cat(void) override;
 
 		void	makeSound(void) const override;
+		Brain* getBrain() const;
 };
 
 #endif // CAT_HPP

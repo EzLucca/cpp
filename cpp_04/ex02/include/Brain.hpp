@@ -20,6 +20,8 @@ class Brain {
 		Brain &operator=(const Brain &other);
 		~Brain(void);
 
+		void	setIdea(int index, std::string idea);
+		std::string	getIdea(int index) const;
 };
 
 #endif // BRAIN_HPP

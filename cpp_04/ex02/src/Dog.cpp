@@ -73,3 +73,12 @@ Dog &Dog::operator=(const Dog &other) {
 void	Dog::makeSound(void) const {
 	std::cout << "Dog hoooof hooooooff\n";
 };
+
+/**
+ * @brief Get the idea from the dog.
+ *
+ * @return the idea stored on _dogBrain.
+ */
+Brain* Dog::getBrain() const {
+    return _dogBrain;
+}

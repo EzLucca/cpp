@@ -6,69 +6,75 @@
 
 int main(void) {
 
-    std::cout << "-----------------------------------------" << std::endl;
-    std::cout << "[ Test 1: Subject default test ]"			 << std::endl;
-    std::cout << "-----------------------------------------" << std::endl;
+	std::cout << "-----------------------------------------" << std::endl;
+	std::cout << "[ Test 1: Subject default test ]"			 << std::endl;
+	std::cout << "-----------------------------------------" << std::endl;
 
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
 
-    std::cout << j->getType() << std::endl;
-    j->makeSound();
+	std::cout << j->getType() << std::endl;
+	j->makeSound();
 
-    std::cout << i->getType() << std::endl;
-    i->makeSound();
+	std::cout << i->getType() << std::endl;
+	i->makeSound();
 
-    std::cout << meta->getType() << std::endl;
-    meta->makeSound();
+	std::cout << meta->getType() << std::endl;
+	meta->makeSound();
 
-    delete meta;
-    delete j;
-    delete i;
+	delete meta;
+	delete j;
+	delete i;
 
-    std::cout << "\n-----------------------------------------"  << std::endl;
-    std::cout << "[ Test 2: Deep copy (Dog) ]"					<< std::endl;
-    std::cout << "-----------------------------------------"	<< std::endl;
+	std::cout << "\n-----------------------------------------"  << std::endl;
+	std::cout << "[ Test 2: Deep copy (Dog) ]"					<< std::endl;
+	std::cout << "-----------------------------------------"	<< std::endl;
 
-    Dog dog1;
-    {
-        Dog dog2(dog1); // copy constructor
-        std::cout << "Dog2 created by copy constructor" << std::endl;
-    } // dog2 destroyed here
+	Dog dog1;
+	dog1.getBrain()->setIdea(0, "Dog1 idea: Chase the cat");
+	{
+		Dog dog2(dog1); // copy constructor
+		std::cout << "Dog2 created by copy constructor" << std::endl;
+		dog2.getBrain()->setIdea(0, "Dog2 idea: Bark at the cat");
+		std::cout << dog2.getBrain()->getIdea(0) << std::endl;
+		std::cout << "Dog1 brain: " << dog1.getBrain() << std::endl;
+		std::cout << "Dog2 brain: " << dog2.getBrain() << std::endl;
+	} // dog2 destroyed here
+	std::cout << dog1.getBrain()->getIdea(0) << std::endl;
 
-    std::cout << "Dog1 still alive after dog2 destruction" << std::endl;
+	std::cout << "Dog1 still alive after dog2 destruction" << std::endl;
 
-    std::cout << "\n-----------------------------------------"	<< std::endl;
-    std::cout << "[ Test 3: Deep copy (assignment operator) ]"	<< std::endl;
-    std::cout << "-----------------------------------------"	<< std::endl;
+	std::cout << "\n-----------------------------------------"	<< std::endl;
+	std::cout << "[ Test 3: Deep copy (assignment operator) ]"	<< std::endl;
+	std::cout << "-----------------------------------------"	<< std::endl;
 
-    Dog dog3;
-    Dog dog4;
+	Dog dog3;
+	Dog dog4;
 
-    dog4 = dog3; // copy assignment
-    std::cout << "Dog4 assigned from Dog3" << std::endl;
+	dog4 = dog3; // copy assignment
+	std::cout << "Dog3 assigned Dog4" << std::endl;
 
-    std::cout << "\n-----------------------------------------"	<< std::endl;
-    std::cout << "[ Test 4: Array test (subject-style) ]"		<< std::endl;
-    std::cout << "-----------------------------------------"	<< std::endl;
+	std::cout << "\n-----------------------------------------"	<< std::endl;
+	std::cout << "[ Test 4: Array test (subject-style) ]"		<< std::endl;
+	std::cout << "-----------------------------------------"	<< std::endl;
 
-    const int size = 4;
-    Animal* animals[size];
+	const int size = 4;
+	Animal* animals[size];
 
-    for (int k = 0; k < size; k++) {
-        if (k < size / 2)
-            animals[k] = new Dog();
-        else
-            animals[k] = new Cat();
-    }
+	for (int k = 0; k < size; k++) {
+		if (k < size / 2)
+			animals[k] = new Dog();
+		else
+			animals[k] = new Cat();
+	}
 
-    for (int k = 0; k < size; k++)
-        delete animals[k];
+	for (int k = 0; k < size; k++)
+		delete animals[k];
 
-    std::cout << "\n-----------------------------------------"	<< std::endl;
-    std::cout << "[ All tests done! ]"							<< std::endl;
-    std::cout << "-----------------------------------------"	<< std::endl;
+	std::cout << "\n-----------------------------------------"	<< std::endl;
+	std::cout << "[ All tests done! ]"							<< std::endl;
+	std::cout << "-----------------------------------------"	<< std::endl;
 
-    return 0;
+	return 0;
 }

@@ -50,3 +50,29 @@ Brain &Brain::operator=(const Brain &other) {
 Brain::~Brain() {
 	std::cout << "Brain default destructor called.\n";
 }
+
+/**
+ * @brief Set an idea.
+ *
+ * Store one idea on the index.
+ *
+ * @param index The correct index position to store the idea
+ * @param idea The idea to be stored
+ */
+void	Brain::setIdea(int index, std::string idea){
+	if (index >= 0 && index < 100)
+		_ideas[index] = idea;
+	return ;
+}
+
+/**
+ * @brief get an idea.
+ *
+ * Get the idea from the index if exist or ??? otherwise.
+ *
+ * @param index The correct index position to store the idea
+ * @return the idea store on the index position
+ */
+std::string	Brain::getIdea(int index) const{
+	return (index >= 0 && index < 100) ? _ideas[index] : "???";
+}

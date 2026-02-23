@@ -73,3 +73,12 @@ Cat &Cat::operator=(const Cat &other) {
 void	Cat::makeSound(void) const {
 	std::cout << "Cat meow meow\n";
 };
+
+/**
+ * @brief Get the idea from the dog.
+ *
+ * @return the idea stored on _catBrain.
+ */
+Brain* Cat::getBrain() const {
+    return _catBrain;
+}
