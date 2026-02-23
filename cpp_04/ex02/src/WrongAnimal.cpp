@@ -51,7 +51,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other) {
  */
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
 	if (this != &other) {
-		this->_type = other._type;
+		_type = other._type;
 	}
 	std::cout << "WrongAnimal copy assigment operator called.\n";
 	return (*this);
@@ -74,5 +74,5 @@ std::string WrongAnimal::getType(void) const {
  * cannot override it polymorphically.
  */
 void WrongAnimal::makeSound(void) const {
-	std::cout << "WrongAnimal ....from " << this->_type << "\n";
+	std::cout << "WrongAnimal ....from " << _type << "\n";
 }

@@ -49,7 +49,7 @@ Animal::Animal(const Animal &other) {
  */
 Animal &Animal::operator=(const Animal &other) {
 	if (this != &other) {
-		this->_type = other._type;
+		_type = other._type;
 	}
 	std::cout << "Animal copy assigment operator called.\n";
 	return (*this);

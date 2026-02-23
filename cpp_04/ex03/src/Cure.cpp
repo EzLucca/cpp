@@ -26,7 +26,7 @@ Cure::Cure(const Cure &other) : AMateria(other._type) {}
  */
 Cure &Cure::operator=(const Cure &other) {
     if (this != &other)
-        this->_type = other._type;
+        _type = other._type;
     return *this;
 }
 

@@ -6,7 +6,7 @@
  * Initializes a WrongCat object and sets its type to "WrongCat".
  */
 WrongCat::WrongCat(void) : WrongAnimal() {
-	this->_type = "WrongCat";
+	_type = "WrongCat";
 	std::cout << "WrongCat default constructor called.\n";
 }
 
@@ -29,7 +29,7 @@ WrongCat::~WrongCat(void) {
  * @param type Unused parameter kept for interface consistency.
  */
 WrongCat::WrongCat(std::string type) : WrongAnimal(type) {
-	this->_type = "WrongCat";
+	_type = "WrongCat";
 	std::cout << "WrongCat type constructor called.\n";
 }
 

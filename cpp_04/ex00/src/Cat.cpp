@@ -6,7 +6,7 @@
  * Initializes a Cat object and sets its type to "Cat".
  */
 Cat::Cat(void) : Animal() {
-	this->_type = "Cat";
+	_type = "Cat";
 	std::cout << "Cat default constructor called.\n";
 }
 
@@ -27,7 +27,7 @@ Cat::~Cat(void) {
  * @param type Unused parameter kept for interface consistency.
  */
 Cat::Cat(std::string type) : Animal(type) {
-	this->_type = "Cat";
+	_type = "Cat";
 	std::cout << "Cat type constructor called.\n";
 }
 

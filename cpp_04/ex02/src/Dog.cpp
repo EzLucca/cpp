@@ -6,9 +6,9 @@
  * Initializes a Dog object with type "Dog" and allocates a new Brain.
  */
 Dog::Dog(void) : Animal() {
-	this->_type = "Dog";
-	this->_dogBrain = new Brain();
-	std::cout << "Dog default constructor called.\n";
+	_type = "Dog";
+	_dogBrain = new Brain();
+	std::cout << "Dog default constructor called.\n\n";
 }
 
 /**
@@ -17,8 +17,8 @@ Dog::Dog(void) : Animal() {
  * Deletes the dynamically allocated Brain to avoid memory leaks.
  */
 Dog::~Dog(void) {
-	delete this->_dogBrain;
-	std::cout << "Dog default destructor called.\n";
+	delete _dogBrain;
+	std::cout << "Dog default destructor called.\n\n";
 }
 
 /**
@@ -29,9 +29,9 @@ Dog::~Dog(void) {
  * @param type The type assigned to the dog (ignored, overridden as "Dog").
  */
 Dog::Dog(std::string type) : Animal(type) {
-	this->_type = "Dog";
-	this->_dogBrain = new Brain();
-	std::cout << "Dog type constructor called.\n";
+	_type = "Dog";
+	_dogBrain = new Brain();
+	std::cout << "Dog type constructor called.\n\n";
 };
 
 /**
@@ -43,8 +43,8 @@ Dog::Dog(std::string type) : Animal(type) {
  */
 Dog::Dog(const Dog &other) : Animal(other) {
 	_type = other._type;
-	this->_dogBrain = new Brain(*other._dogBrain);
-	std::cout << "Dog copy constructor called.\n";
+	_dogBrain = new Brain(*other._dogBrain);
+	std::cout << "Dog copy constructor called.\n\n";
 };
 
 /**
@@ -58,10 +58,10 @@ Dog::Dog(const Dog &other) : Animal(other) {
 Dog &Dog::operator=(const Dog &other) {
 	if (this != &other) {
 		Animal::operator=(other);
-		delete this->_dogBrain;
-		this->_dogBrain = new Brain(*other._dogBrain);
+		delete _dogBrain;
+		_dogBrain = new Brain(*other._dogBrain);
 	}
-	std::cout	<< "Dog copy assigment operator called.\n";
+	std::cout	<< "Dog copy assigment operator called.\n\n";
 	return (*this);
 };
 

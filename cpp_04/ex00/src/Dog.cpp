@@ -6,7 +6,7 @@
  * Initializes a Dog object and sets its type to "Dog".
  */
 Dog::Dog(void) : Animal() {
-	this->_type = "Dog";
+	_type = "Dog";
 	std::cout << "Dog default constructor called.\n";
 }
 
@@ -27,7 +27,7 @@ Dog::~Dog(void) {
  * @param type Unused parameter kept for interface consistency.
  */
 Dog::Dog(std::string type) : Animal(type) {
-	this->_type = "Dog";
+	_type = "Dog";
 	std::cout << "Dog type constructor called.\n";
 }
 

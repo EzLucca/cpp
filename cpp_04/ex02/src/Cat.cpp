@@ -6,9 +6,9 @@
  * Initializes a Cat object with type "Cat" and allocates a new Brain.
  */
 Cat::Cat(void) : Animal() {
-	this->_type = "Cat";
-	this->_catBrain = new Brain();
-	std::cout << "Cat default constructor called.\n";
+	_type = "Cat";
+	_catBrain = new Brain();
+	std::cout << "Cat default constructor called.\n\n";
 }
 
 /**
@@ -17,8 +17,8 @@ Cat::Cat(void) : Animal() {
  * Deletes the dynamically allocated Brain to avoid memory leaks.
  */
 Cat::~Cat(void) {
-	delete this->_catBrain;
-	std::cout << "Cat default destructor called.\n";
+	delete _catBrain;
+	std::cout << "Cat default destructor called.\n\n";
 }
 
 /**
@@ -29,9 +29,9 @@ Cat::~Cat(void) {
  * @param type The type assigned to the cat (ignored, overridden as "Cat").
  */
 Cat::Cat(std::string type) : Animal(type) {
-	this->_type = "Cat";
-	this->_catBrain = new Brain();
-	std::cout << "Cat type constructor called.\n";
+	_type = "Cat";
+	_catBrain = new Brain();
+	std::cout << "Cat type constructor called.\n\n";
 };
 
 /**
@@ -43,8 +43,8 @@ Cat::Cat(std::string type) : Animal(type) {
  */
 Cat::Cat(const Cat &other) : Animal(other) {
 	_type = other._type;
-	this->_catBrain = new Brain(*other._catBrain);
-	std::cout << "Cat copy constructor called.\n";
+	_catBrain = new Brain(*other._catBrain);
+	std::cout << "Cat copy constructor called.\n\n";
 };
 
 /**
@@ -58,10 +58,10 @@ Cat::Cat(const Cat &other) : Animal(other) {
 Cat &Cat::operator=(const Cat &other) {
 	if (this != &other) {
 		Animal::operator=(other);
-		delete this->_catBrain;
-		this->_catBrain = new Brain(*other._catBrain);
+		delete _catBrain;
+		_catBrain = new Brain(*other._catBrain);
 	}
-	std::cout	<< "Cat copy assigment operator called.\n";
+	std::cout	<< "Cat copy assigment operator called.\n\n";
 	return (*this);
 };
 
