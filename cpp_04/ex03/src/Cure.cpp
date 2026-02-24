@@ -61,4 +61,3 @@ void	Cure::use(ICharacter& target) {
 		<< target.getName()
 		<< "'s wounds *\n";
 }
-

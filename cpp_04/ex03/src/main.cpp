@@ -11,8 +11,8 @@ int main()
 	IMateriaSource* src = new MateriaSource();
 
 	// This leaks
-	// 	src->learnMateria(new Ice());
-	// 	src->learnMateria(new Cure());
+	// src->learnMateria(new Ice());
+	// src->learnMateria(new Cure());
 
 	AMateria* ice = new Ice();
 	AMateria* cure = new Cure();

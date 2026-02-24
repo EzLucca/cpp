@@ -117,4 +117,3 @@ void	Character::use(int idx, ICharacter& target) {
 		return ;
 	_inventory[idx]->use(target);
 }
-

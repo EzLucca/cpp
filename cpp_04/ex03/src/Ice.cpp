@@ -60,4 +60,3 @@ void	Ice::use(ICharacter& target) {
 		<< target.getName()
 		<< " *\n";
 }
-
