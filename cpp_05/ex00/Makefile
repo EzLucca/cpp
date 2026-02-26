@@ -1,7 +1,7 @@
 C++       	:= c++
 CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror -Wshadow
 
-NAME     	:= Polymorphism
+NAME     	:= bureaucrat
 
 SRC_DIR		:= src
 INC_DIR		:= include
