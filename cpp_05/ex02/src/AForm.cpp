@@ -1,12 +1,12 @@
-#include "../include/Form.hpp"
-// #include "Form.hpp"
+#include "../include/AForm.hpp"
+// #include "AForm.hpp"
 
 /**
  * @brief Default constructor.
  *
- * Initializes the Form with a default type.
+ * Initializes the AForm with a default type.
  */
-Form::Form() : 
+AForm::AForm() : 
 	_name("default"),
 	_issigned(false),
 	_signedgrade(75),
@@ -16,11 +16,11 @@ Form::Form() :
 /**
  * @brief Copy constructor.
  *
- * Creates a new Form by copying another one.
+ * Creates a new AForm by copying another one.
  *
- * @param other The Form object to copy from.
+ * @param other The AForm object to copy from.
  */
-Form::Form(const Form &other) :
+AForm::AForm(const AForm &other) :
 	_name(other._name),
 	_issigned(other._issigned),
 	_signedgrade(other._signedgrade),
@@ -30,12 +30,12 @@ Form::Form(const Form &other) :
 /**
  * @brief Copy assignment operator.
  *
- * Assigns the values of another Form to this instance.
+ * Assigns the values of another AForm to this instance.
  *
- * @param other The Form object to assign from.
- * @return Reference to the assigned Form.
+ * @param other The AForm object to assign from.
+ * @return Reference to the assigned AForm.
  */
-Form &Form::operator=(const Form &other) {
+AForm &AForm::operator=(const AForm &other) {
 	if(this != &other){
 		_issigned = other._issigned;
 	}
@@ -45,14 +45,14 @@ Form &Form::operator=(const Form &other) {
 /**
  * @brief Destructor.
  *
- * Called when the Form object is destroyed.
+ * Called when the AForm object is destroyed.
  */
-Form::~Form() {}
+AForm::~AForm() {}
 
 /**
- * @brief Constructs a Form object with the specified parameters.
+ * @brief Constructs a AForm object with the specified parameters.
  *
- * Initializes a Form with a given name, signed status, required grade to sign,
+ * Initializes a AForm with a given name, signed status, required grade to sign,
  * and required grade to execute.
  *
  * @param name The name of the form.
@@ -63,7 +63,7 @@ Form::~Form() {}
  * @throw GradeTooHighException Thrown if either signedgrade or executedgrade is less than 1.
  * @throw GradeTooLowException Thrown if either signedgrade or executedgrade is greater than 150.
  */
-Form::Form(std::string name, bool issigned, int signedgrade, int executedgrade) :
+AForm::AForm(std::string name, bool issigned, int signedgrade, int executedgrade) :
 	_name(name),
 	_issigned(issigned),
 	_signedgrade(signedgrade),
@@ -78,38 +78,38 @@ Form::Form(std::string name, bool issigned, int signedgrade, int executedgrade) 
 /**
  * @brief get _name
  *
- * Get the private value of _name from the Form object.
+ * Get the private value of _name from the AForm object.
  *
  * @return string _name
  */
-const std::string	Form::getName() const {return _name;};
+const std::string	AForm::getName() const {return _name;};
 
 /**
  * @brief get _issigned
  *
- * Get the private value of _issigned from the Form object.
+ * Get the private value of _issigned from the AForm object.
  *
  * @return bool _issigned
  */
-bool	Form::getIssigned() const {return _issigned;};
+bool	AForm::getIssigned() const {return _issigned;};
 
 /**
  * @brief get _signedgrade
  *
- * Get the private value of _signedgrade from the Form object.
+ * Get the private value of _signedgrade from the AForm object.
  *
  * @return integer _signedgrade
  */
-int		Form::getSignedGrade() const {return _signedgrade;};
+int		AForm::getSignedGrade() const {return _signedgrade;};
 
 /**
  * @brief get _executedgrade
  *
- * Get the private value of _executedgrade from the Form object.
+ * Get the private value of _executedgrade from the AForm object.
  *
  * @return integer _executedgrade
  */
-int		Form::getExecutedGrade() const {return _executedgrade;};
+int		AForm::getExecutedGrade() const {return _executedgrade;};
 
 /**
  * @brief Attempts to sign the form with the given Bureaucrat.
@@ -123,7 +123,7 @@ int		Form::getExecutedGrade() const {return _executedgrade;};
  * @throw FormSigned Thrown if the form is already signed.
  * @throw GradeTooLowException Thrown if the Bureaucrat's grade is too low to sign the form.
  */
-void	Form::beSigned(Bureaucrat &corporate) {
+void	AForm::beSigned(Bureaucrat &corporate) {
 	if(this->_issigned) {
 		throw FormSigned();
 	}
@@ -137,11 +137,11 @@ void	Form::beSigned(Bureaucrat &corporate) {
  * @brief Returns a string describing the exception.
  * 
  * This function overrides std::exception::what() and provides a
- * descriptive message when a Form's grade is too high.
+ * descriptive message when a AForm's grade is too high.
  *
  * @return const char* A null-terminated string describing the exception.
  */
-const char* Form::GradeTooHighException::what() const throw(){
+const char* AForm::GradeTooHighException::what() const throw(){
 	return "the grade is too high";
 }
 
@@ -149,11 +149,11 @@ const char* Form::GradeTooHighException::what() const throw(){
  * @brief Returns a string describing the exception.
  * 
  * This function overrides std::exception::what() and provides a
- * descriptive message when a Form's grade is too low.
+ * descriptive message when a AForm's grade is too low.
  *
  * @return const char* A null-terminated string describing the exception.
  */
-const char* Form::GradeTooLowException::what() const throw(){
+const char* AForm::GradeTooLowException::what() const throw(){
 	return "the grade is too low";
 }
 
@@ -161,22 +161,22 @@ const char* Form::GradeTooLowException::what() const throw(){
  * @brief Returns a string describing the exception.
  * 
  * This function overrides std::exception::what() and provides a
- * descriptive message when a Form is already signed.
+ * descriptive message when a AForm is already signed.
  *
  * @return const char* A null-terminated string describing the exception.
  */
-const char* Form::FormSigned::what() const throw(){
+const char* AForm::FormSigned::what() const throw(){
 	return "the form was previously signed";
 }
 
 /**
- * @brief Overload of << operator for printing Form private members.
+ * @brief Overload of << operator for printing AForm private members.
  *
  * @param outstream The output stream.
- * @param form1 The Form instance to print.
+ * @param form1 The AForm instance to print.
  * @return Reference to the output stream.
  */
-std::ostream &operator<<(std::ostream &outstream, Form &form1){
+std::ostream &operator<<(std::ostream &outstream, AForm &form1){
 	outstream << "form name: " << form1.getName()
 		<< "\nsignature state: " << form1.getIssigned() 
 		<< "\nsigning grade: " << form1.getSignedGrade()

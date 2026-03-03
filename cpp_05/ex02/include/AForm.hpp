@@ -6,7 +6,7 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
 	private:
 		const std::string _name;
 		bool	_issigned;
@@ -14,12 +14,12 @@ class Form {
 		const int _executedgrade;
 
 	public:
-		Form(void);
-		Form(const Form &other);
-		Form &operator=(const Form &other);
-		~Form(void);
+		AForm(void);
+		AForm(const AForm &other);
+		AForm &operator=(const AForm &other);
+		~AForm(void);
 
-		Form(std::string name, bool issigned, int signedgrade, int executedgrade);
+		AForm(std::string name, bool issigned, int signedgrade, int executedgrade);
 		const std::string	getName() const;
 		bool	getIssigned() const;
 		int		getSignedGrade() const;
@@ -40,8 +40,9 @@ class Form {
 			public:
 				const	char*	what() const throw();
 		};
+		virtual void	execute(Bureaucrat const & executor) const = 0;
 };
 
-std::ostream &operator<<(std::ostream &outstream, Form &f1);
+std::ostream &operator<<(std::ostream &outstream, AForm &f1);
 
 #endif // FORM_HPP
