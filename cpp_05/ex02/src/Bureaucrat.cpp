@@ -137,6 +137,27 @@ const	char*	Bureaucrat::GradeTooLowException::what() const throw() {
 	return "Grade is too low.";
 }
 
+void	Bureaucrat::signForm(AForm &form) {
+	try {
+		form.beSigned(*this);
+		std::cout << this->_name << " signed form " << form.getName() << std::endl; 
+	}
+	catch (std::exception &e) {
+		std::cout << this->_name << " couldn't sign form " << form.getName()
+			<< "because " << e.what() << std::endl; 
+	}
+}
+void	Bureaucrat::executeForm(AForm const &form) {
+	try {
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << std::endl; 
+	}
+	catch (std::exception &e) {
+		std::cout << this->_name << " couldn't sign form " << form.getName()
+			<< "because " << e.what() << std::endl; 
+	}
+}
+
 /**
  * @brief Overload of << operator for printing Bureaucrat private members.
  *

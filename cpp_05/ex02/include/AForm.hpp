@@ -10,8 +10,8 @@ class AForm {
 	private:
 		const std::string _name;
 		bool	_issigned;
-		const int _signedgrade;
-		const int _executedgrade;
+		const int _signgrade;
+		const int _executegrade;
 
 	public:
 		AForm(void);
@@ -19,7 +19,7 @@ class AForm {
 		AForm &operator=(const AForm &other);
 		~AForm(void);
 
-		AForm(std::string name, bool issigned, int signedgrade, int executedgrade);
+		AForm(std::string name, bool issigned, int signgrade, int executegrade);
 		const std::string	getName() const;
 		bool	getIssigned() const;
 		int		getSignedGrade() const;

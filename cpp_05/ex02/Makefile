@@ -11,8 +11,6 @@ SRC      	:= main.cpp \
 			   Bureaucrat.cpp \
 			   AForm.cpp \
 			   ShrubberyCreationForm.cpp \
-			   PresidentialPardonForm.cpp \
-			   RobotomyRequestForm.cpp \
 
 SRCS       := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ       	:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <exception>
+#include "AForm.hpp"
 
 class AForm;
 class Bureaucrat {
@@ -32,7 +33,8 @@ class Bureaucrat {
 				const	char*	what() const throw();
 		};
 
-		void	executeForm(AForm const & form)const;
+		void	signForm(AForm &form);
+		void	executeForm(AForm const & form);
 };
 
 std::ostream &operator<<(std::ostream &outstream, Bureaucrat &corporate);

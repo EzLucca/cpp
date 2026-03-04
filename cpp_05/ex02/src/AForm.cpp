@@ -9,8 +9,8 @@
 AForm::AForm() : 
 	_name("default"),
 	_issigned(false),
-	_signedgrade(75),
-	_executedgrade(75)
+	_signgrade(75),
+	_executegrade(75)
 {}
 
 /**
@@ -23,8 +23,8 @@ AForm::AForm() :
 AForm::AForm(const AForm &other) :
 	_name(other._name),
 	_issigned(other._issigned),
-	_signedgrade(other._signedgrade),
-	_executedgrade(other._executedgrade)
+	_signgrade(other._signgrade),
+	_executegrade(other._executegrade)
 {}
 
 /**
@@ -63,15 +63,15 @@ AForm::~AForm() {}
  * @throw GradeTooHighException Thrown if either signedgrade or executedgrade is less than 1.
  * @throw GradeTooLowException Thrown if either signedgrade or executedgrade is greater than 150.
  */
-AForm::AForm(std::string name, bool issigned, int signedgrade, int executedgrade) :
+AForm::AForm(std::string name, bool issigned, int signgrade, int executegrade) :
 	_name(name),
 	_issigned(issigned),
-	_signedgrade(signedgrade),
-	_executedgrade(executedgrade)
+	_signgrade(signgrade),
+	_executegrade(executegrade)
 {
-	if(signedgrade < 1 || executedgrade < 1)
+	if(signgrade < 1 || executegrade < 1)
 		throw GradeTooHighException();
-	else if (signedgrade > 150 || executedgrade > 150)
+	else if (signgrade > 150 || executegrade > 150)
 		throw GradeTooLowException();
 }
 
@@ -94,29 +94,29 @@ const std::string	AForm::getName() const {return _name;};
 bool	AForm::getIssigned() const {return _issigned;};
 
 /**
- * @brief get _signedgrade
+ * @brief get _signgrade
  *
- * Get the private value of _signedgrade from the AForm object.
+ * Get the private value of _signgrade from the AForm object.
  *
- * @return integer _signedgrade
+ * @return integer _signgrade
  */
-int		AForm::getSignedGrade() const {return _signedgrade;};
+int		AForm::getSignedGrade() const {return _signgrade;};
 
 /**
- * @brief get _executedgrade
+ * @brief get _executegrade
  *
- * Get the private value of _executedgrade from the AForm object.
+ * Get the private value of _executegrade from the AForm object.
  *
- * @return integer _executedgrade
+ * @return integer _executegrade
  */
-int		AForm::getExecutedGrade() const {return _executedgrade;};
+int		AForm::getExecutedGrade() const {return _executegrade;};
 
 /**
  * @brief Attempts to sign the form with the given Bureaucrat.
  *
  * This function allows a Bureaucrat to sign the form if:
  * - The form is not already signed.
- * - The Bureaucrat's grade is sufficient (less than or equal to _signedgrade).
+ * - The Bureaucrat's grade is sufficient (less than or equal to _signgrade).
  *
  * @param corporate The Bureaucrat attempting to sign the form.
  *
@@ -127,7 +127,7 @@ void	AForm::beSigned(Bureaucrat &corporate) {
 	if(this->_issigned) {
 		throw FormSigned();
 	}
-	if(corporate.getGrade() > this->_signedgrade){
+	if(corporate.getGrade() > this->_signgrade){
 		throw GradeTooLowException();
 	}
 	this->_issigned = true;
