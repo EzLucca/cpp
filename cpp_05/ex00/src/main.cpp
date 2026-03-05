@@ -17,7 +17,7 @@ int	main () {
 		"-----------------------------------------\n";
 
 	try{
-		Bureaucrat Anna("Ana Maria Braga", 149);
+		Bureaucrat Anna("Ana Maria Braga", 189);
 		std::cout << "name: " << Anna.getName()
 			<< "\ngrade: " << Anna.getGrade() << "\n";
 		Anna.incrementGrade();

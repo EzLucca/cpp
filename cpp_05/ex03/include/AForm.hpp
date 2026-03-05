@@ -17,7 +17,7 @@ class AForm {
 		AForm(void);
 		AForm(const AForm &other);
 		AForm &operator=(const AForm &other);
-		~AForm(void);
+		virtual ~AForm(void);
 
 		AForm(std::string name, bool issigned, int signgrade, int executegrade);
 		const std::string	getName() const;

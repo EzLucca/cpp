@@ -2,6 +2,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 #include <cstdlib>
 #include <ctime>
 
@@ -106,13 +107,55 @@ int	main () {
 			// std::cout << form1 << std::endl;
 			// std::cout << form2 << std::endl;
 			// std::cout << form3 << std::endl;
-			
+
 			boss.signForm(form1);
 			boss.executeForm(form1);
 			boss.signForm(form2);
 			boss.executeForm(form2);
 			boss.signForm(form3);
 			boss.executeForm(form3);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+	}
+	{
+		std::cout << "\n----- [ Test: Intern form creation ] -----\n\n";
+
+		try
+		{
+			Intern someRandomIntern;
+			Bureaucrat boss("Boss", 15);
+
+			AForm *form1 = someRandomIntern.makeForm("shrubbery creation", "Home");
+			AForm *form2 = someRandomIntern.makeForm("robotomy request", "Bender");
+			AForm *form3 = someRandomIntern.makeForm("presidential pardon", "Alice");
+			AForm *form4 = someRandomIntern.makeForm("unknown form", "Target");
+
+			if (form1)
+			{
+				boss.signForm(*form1);
+				boss.executeForm(*form1);
+				delete form1;
+			}
+
+			if (form2)
+			{
+				boss.signForm(*form2);
+				boss.executeForm(*form2);
+				delete form2;
+			}
+
+			if (form3)
+			{
+				boss.signForm(*form3);
+				boss.executeForm(*form3);
+				delete form3;
+			}
+
+			if (form4)
+				delete form4;
 		}
 		catch (std::exception &e)
 		{
