@@ -129,10 +129,6 @@ int	main () {
 			Bureaucrat boss("Boss", 15);
 
 			AForm *form1 = someRandomIntern.makeForm("shrubbery creation", "Home");
-			AForm *form2 = someRandomIntern.makeForm("robotomy request", "Bender");
-			AForm *form3 = someRandomIntern.makeForm("presidential pardon", "Alice");
-			AForm *form4 = someRandomIntern.makeForm("unknown form", "Target");
-
 			if (form1)
 			{
 				boss.signForm(*form1);
@@ -140,6 +136,7 @@ int	main () {
 				delete form1;
 			}
 
+			AForm *form2 = someRandomIntern.makeForm("robotomy request", "Bender");
 			if (form2)
 			{
 				boss.signForm(*form2);
@@ -147,6 +144,7 @@ int	main () {
 				delete form2;
 			}
 
+			AForm *form3 = someRandomIntern.makeForm("presidential pardon", "Alice");
 			if (form3)
 			{
 				boss.signForm(*form3);
@@ -154,6 +152,7 @@ int	main () {
 				delete form3;
 			}
 
+			AForm *form4 = someRandomIntern.makeForm("unknown form", "Target");
 			if (form4)
 				delete form4;
 		}

@@ -71,6 +71,7 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &formTarg
 		case 1:
 			std::cout << "Intern creates " << formName << std::endl;
 			return new RobotomyRequestForm(formTarget);
+			// throw std::bad_alloc();
 		case 2:
 			std::cout << "Intern creates " << formName << std::endl;
 			return new PresidentialPardonForm(formTarget);
