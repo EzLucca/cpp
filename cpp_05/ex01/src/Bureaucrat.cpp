@@ -65,7 +65,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
  * Called when the Bureaucrat object is destroyed.
  */
 Bureaucrat::~Bureaucrat() {
-	std::cout << "Desctructor called\n";
+	std::cout << "Destructor called\n";
 }
 
 const std::string	Bureaucrat::getName() const {
@@ -165,7 +165,7 @@ const	char*	Bureaucrat::GradeTooLowException::what() const throw() {
  * @return Reference to the output stream.
  */
 std::ostream &operator<<(std::ostream &outstream, Bureaucrat &corporate) {
-	outstream << corporate.getName() << " , bureaucrat grade "
-		<< corporate.getGrade() << ".\n";
+	outstream << "Name: " << corporate.getName() << "\nBureaucrat grade: "
+		<< corporate.getGrade() << "\n";
 	return outstream;
 };

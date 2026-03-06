@@ -8,8 +8,7 @@ int	main () {
 
 	Bureaucrat suit0;
 
-	std::cout << "name: " << suit0.getName()
-		<< "\ngrade: " << suit0.getGrade() << "\n";
+	std::cout << suit0 << std::endl;
 
 	std::cout <<
 		"-----------------------------------------\n"
@@ -17,12 +16,10 @@ int	main () {
 		"-----------------------------------------\n";
 
 	try{
-		Bureaucrat Anna("Ana Maria Braga", 189);
-		std::cout << "name: " << Anna.getName()
-			<< "\ngrade: " << Anna.getGrade() << "\n";
+		Bureaucrat Anna("Ana Maria Braga", 149);
+		std::cout << Anna << std::endl;
 		Anna.incrementGrade();
-		std::cout << "name: " << Anna.getName()
-			<< "\ngrade: " << Anna.getGrade() << "\n";
+		std::cout << Anna << std::endl;
 		Anna.decrementGrade();
 		Anna.decrementGrade();
 	}
@@ -38,11 +35,9 @@ int	main () {
 	try{
 		Bureaucrat silva("Silvio Santos", 150);
 		Bureaucrat silva2(silva);
-		std::cout << "name: " << silva2.getName()
-			<< "\ngrade: " << silva2.getGrade() << "\n";
+		std::cout << silva2 << std::endl;
 		silva2.incrementGrade();
-		std::cout << "name: " << silva2.getName()
-			<< "\ngrade: " << silva2.getGrade() << "\n";
+		std::cout << silva2 << std::endl;
 		silva2.decrementGrade();
 		silva2.decrementGrade();
 		silva2.decrementGrade();
@@ -59,11 +54,9 @@ int	main () {
 	try{
 		Bureaucrat flavio("flavio", 1);
 		Bureaucrat aurelius = flavio;
-		std::cout << "name: " << aurelius.getName()
-			<< "\ngrade: " << aurelius.getGrade() << "\n";
+		std::cout << aurelius << std::endl;
 		aurelius.decrementGrade();
-		std::cout << "name: " << aurelius.getName()
-			<< "\ngrade: " << aurelius.getGrade() << "\n";
+		std::cout << aurelius << std::endl;
 		aurelius.incrementGrade();
 		aurelius.incrementGrade();
 		aurelius.incrementGrade();

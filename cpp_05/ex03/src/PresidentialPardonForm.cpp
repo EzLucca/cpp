@@ -34,7 +34,7 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string target) :
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) :
 	AForm("PresidentialPardonForm", false, 25, 5),
 	_target(other._target){
-		std::cout << " Copy Constructor called.\n";
+		std::cout << "Copy Constructor called.\n";
 	}
 
 /**

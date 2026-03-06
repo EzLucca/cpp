@@ -65,7 +65,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
  * Called when the Bureaucrat object is destroyed.
  */
 Bureaucrat::~Bureaucrat() {
-	std::cout << "Desctructor called\n";
+	std::cout << "Destructor called\n";
 }
 
 const std::string	Bureaucrat::getName() const {
