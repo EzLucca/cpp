@@ -121,7 +121,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	if(out.fail()) {
 		throw ShrubberyCreationForm::FileOpenException();
 	}
-	out << arvore;
+	out << arvore << std::endl;
 	out.close();
 };
 

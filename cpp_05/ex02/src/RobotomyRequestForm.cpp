@@ -34,7 +34,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string target) :
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) :
 	AForm("RobotomyRequestForm", false, 72, 45),
 	_target(other._target){
-		std::cout << " Copy Constructor called.\n";
+		std::cout << "RobotomyRequestForm copy Constructor called.\n";
 	}
 
 /**
@@ -50,7 +50,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 		_target = other._target;
 		AForm::operator=(other); // why
 	}
-	std::cout << "Copy assignment operator called.\n";
+	std::cout << "RobotomyRequestForm copy assignment operator called.\n";
 	return *this;
 }
 

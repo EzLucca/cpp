@@ -35,7 +35,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) :
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) :
 	AForm("ShrubberyCreationForm", false, 145, 137),
 	_target(other._target){
-		std::cout << "Copy Constructor called.\n";
+		std::cout << "ShrubberyCreationForm copy Constructor called.\n";
 	}
 
 /**
@@ -51,7 +51,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 		_target = other._target;
 		AForm::operator=(other); // why
 	}
-	std::cout << "Copy assignment operator called.\n";
+	std::cout << "ShrubberyCreationForm copy assignment operator called.\n";
 	return *this;
 }
 
@@ -121,7 +121,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	if(out.fail()) {
 		throw ShrubberyCreationForm::FileOpenException();
 	}
-	out << arvore;
+	out << arvore << std::endl;
 	out.close();
 };
 
