@@ -65,7 +65,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
  * Called when the Bureaucrat object is destroyed.
  */
 Bureaucrat::~Bureaucrat() {
-	std::cout << "Desctructor called\n";
+	std::cout << "Destructor called\n";
 }
 
 const std::string	Bureaucrat::getName() const {
@@ -113,6 +113,26 @@ void	Bureaucrat::decrementGrade() {
 	}
 };
 
+/**
+ * @brief sign the form
+ *
+ * will try to sign the form 
+ *
+ * @param form the form to be signed
+ * @throw exception if can't sign it
+ */
+void	Bureaucrat::signForm(Form &form){
+
+	try {
+		form.beSigned(*this);
+		std::cout << this->_name << " signed form " << form.getName() << std::endl; 
+	}
+	catch(std::exception &e){
+		std::cout << this->_name << " couldn't sign form "
+			<< form.getName() << " because "
+			<< e.what() << std::endl; 
+	}
+}
 /**
  * @brief Returns a string describing the exception.
  * 
