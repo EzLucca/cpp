@@ -28,7 +28,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
 	else
 		_grade = grade;
 	std::cout << name << " parameter constructor called\n";
-};
+}
 
 /**
  * @brief Copy constructor.
@@ -70,7 +70,7 @@ Bureaucrat::~Bureaucrat() {
 
 const std::string	Bureaucrat::getName() const {
 	return _name;
-};
+}
 
 /**
  * @brief get Grade
@@ -81,7 +81,7 @@ const std::string	Bureaucrat::getName() const {
  */
 int		Bureaucrat::getGrade() const {
 	return _grade;
-};
+}
 
 /**
  * @brief increment Grade
@@ -96,7 +96,7 @@ void	Bureaucrat::incrementGrade() {
 		_grade--;
 		std::cout << "incrementing bureaucrat's grade" << std::endl;
 	}
-};
+}
 
 /**
  * @brief decrement Grade
@@ -111,7 +111,7 @@ void	Bureaucrat::decrementGrade() {
 		_grade++;
 		std::cout << "decrementing bureaucrat's grade" << std::endl;
 	}
-};
+}
 
 /**
  * @brief sign the form
@@ -188,4 +188,4 @@ std::ostream &operator<<(std::ostream &outstream, Bureaucrat &corporate) {
 	outstream << corporate.getName() << " , bureaucrat grade "
 		<< corporate.getGrade() << ".\n";
 	return outstream;
-};
+}

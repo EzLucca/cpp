@@ -69,6 +69,8 @@ AForm::AForm(std::string name, bool issigned, int signgrade, int executegrade) :
 	_signgrade(signgrade),
 	_executegrade(executegrade)
 {
+	if(this->_issigned) 
+		throw std::invalid_argument("Form cannot be initiated already signed");
 	if(signgrade < 1 || executegrade < 1)
 		throw GradeTooHighException();
 	else if (signgrade > 150 || executegrade > 150)

@@ -70,7 +70,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {
  * Get the target of the object class.
  * @return the _target
  */
-const std::string PresidentialPardonForm::getTarget() const { return _target; };
+const std::string PresidentialPardonForm::getTarget() const { return _target; }
 
 /**
  * @brief Executes the presidential pardon.

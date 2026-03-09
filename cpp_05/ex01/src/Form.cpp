@@ -69,6 +69,8 @@ Form::Form(std::string name, bool issigned, int signedgrade, int executedgrade) 
 	_signedgrade(signedgrade),
 	_executedgrade(executedgrade)
 {
+	if(this->_issigned) 
+		throw std::invalid_argument("Form cannot be initiated already signed");
 	if(signedgrade < 1 || executedgrade < 1)
 		throw GradeTooHighException();
 	else if (signedgrade > 150 || executedgrade > 150)

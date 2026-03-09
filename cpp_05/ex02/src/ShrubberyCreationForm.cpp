@@ -123,7 +123,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	}
 	out << arvore << std::endl;
 	out.close();
-};
+}
 
 /**
  * @brief Returns a string describing the exception.

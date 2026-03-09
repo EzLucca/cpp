@@ -18,6 +18,8 @@ int	main () {
 		{
 			Form f2("Tax Form", false, 50, 25);
 			std::cout << f2 << std::endl;
+			Form f3("Tax Form", true, 50, 25);
+			std::cout << f3 << std::endl;
 		}
 		catch (std::exception &e)
 		{

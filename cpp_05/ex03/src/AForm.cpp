@@ -69,6 +69,8 @@ AForm::AForm(std::string name, bool issigned, int signgrade, int executegrade) :
 	_signgrade(signgrade),
 	_executegrade(executegrade)
 {
+	if(this->_issigned) 
+		throw std::invalid_argument("Form cannot be initiated already signed");
 	if(signgrade < 1 || executegrade < 1)
 		throw GradeTooHighException();
 	else if (signgrade > 150 || executegrade > 150)
@@ -82,7 +84,7 @@ AForm::AForm(std::string name, bool issigned, int signgrade, int executegrade) :
  *
  * @return string _name
  */
-const std::string	AForm::getName() const {return _name;};
+const std::string	AForm::getName() const {return _name;}
 
 /**
  * @brief get _issigned
@@ -91,7 +93,7 @@ const std::string	AForm::getName() const {return _name;};
  *
  * @return bool _issigned
  */
-bool	AForm::getIssigned() const {return _issigned;};
+bool	AForm::getIssigned() const {return _issigned;}
 
 /**
  * @brief get _signgrade
@@ -100,7 +102,7 @@ bool	AForm::getIssigned() const {return _issigned;};
  *
  * @return integer _signgrade
  */
-int		AForm::getSignedGrade() const {return _signgrade;};
+int		AForm::getSignedGrade() const {return _signgrade;}
 
 /**
  * @brief get _executegrade
@@ -109,7 +111,7 @@ int		AForm::getSignedGrade() const {return _signgrade;};
  *
  * @return integer _executegrade
  */
-int		AForm::getExecutedGrade() const {return _executegrade;};
+int		AForm::getExecutedGrade() const {return _executegrade;}
 
 /**
  * @brief Attempts to sign the form with the given Bureaucrat.

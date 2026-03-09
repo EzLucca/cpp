@@ -101,7 +101,7 @@ const char* arvore = R"(
  * Get the target of the object class.
  * @return the _target
  */
-const std::string ShrubberyCreationForm::getTarget() const { return _target; };
+const std::string ShrubberyCreationForm::getTarget() const { return _target; }
 
 /**
  * @brief Creates a file containing ASCII art of a shrubbery.
@@ -123,7 +123,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	}
 	out << arvore << std::endl;
 	out.close();
-};
+}
 
 /**
  * @brief Returns a string describing the exception.
