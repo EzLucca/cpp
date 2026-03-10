@@ -114,27 +114,6 @@ void	Bureaucrat::decrementGrade() {
 }
 
 /**
- * @brief sign the form
- *
- * will try to sign the form 
- *
- * @param form the form to be signed
- * @throw exception if can't sign it
- */
-void	Bureaucrat::signForm(Form &form){
-
-	try {
-		form.beSigned(*this);
-		std::cout << this->_name << " signed form " << form.getName() << std::endl; 
-	}
-	catch(std::exception &e){
-		std::cout << this->_name << " couldn't sign form "
-			<< form.getName() << " because "
-			<< e.what() << std::endl; 
-	}
-}
-
-/**
  * @brief Returns a string describing the exception.
  * 
  * This function overrides std::exception::what() and provides a
