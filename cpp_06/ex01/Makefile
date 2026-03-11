@@ -1,13 +1,15 @@
 C++       	:= c++
-CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror -Wshadow
+CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
 
-NAME     	:= bureaucrat
+NAME     	:= serialization
 
 SRC_DIR		:= src
 INC_DIR		:= include
 OBJ_DIR   	:= obj
 
-SRC      	:= main.cpp \
+SRC      	:= Serializer.cpp \
+			   Data.cpp \
+			   main.cpp
 
 SRCS       := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ       	:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
