@@ -1,34 +1,63 @@
+#include "Aclass.hpp"
 #include "Base.hpp"
+#include "Bclass.hpp"
+#include "Cclass.hpp"
 
-/**
- * @brief Default constructor.
- *
- * Initializes the Base with a default type.
- */
-Base::Base(void) {}
+Base	*generate(void){
+	int	random = std::rand() % 3;
 
-/**
- * @brief Copy constructor.
- *
- * Creates a new Base by copying another one.
- *
- * @param other The Base object to copy from.
- */
-Base::Base(const Base &other) {}
+	switch (random) {
+		case 0:
+			std::cout << "Instanciate Class A\n";
+			return new Aclass();
+		case 1:
+			std::cout << "Instanciate Class B\n";
+			return new Bclass();
+		case 2:
+			std::cout << "Instanciate Class C\n";
+			return new Cclass();
+	}
+	return nullptr;
+}
 
-/**
- * @brief Copy assignment operator.
- *
- * Assigns the values of another Base to this instance.
- *
- * @param other The Base object to assign from.
- * @return Reference to the assigned Base.
- */
-Base &Base::operator=(const Base &other) {}
+void	identify(Base* p){
+	if (!p) {
+		std::cout << "nullpoiter\n";
+		return;
+	}
+	if (dynamic_cast<Aclass*>(p)){
+		std::cout << "Type Class A\n";
+	}
+	else if (dynamic_cast<Bclass*>(p)){
+		std::cout << "Type Class B\n";
+	}
+	else if (dynamic_cast<Cclass*>(p)){
+		std::cout << "Type Class C\n";
+	}
+	else {
+		std::cout << "Unknown class\n";
+	}
+}
 
-/**
- * @brief Destructor.
- *
- * Called when the Base object is destroyed.
- */
-Base::~Base(void) {}
+void	identify(Base& p){
+	try {
+		(void)dynamic_cast<Aclass&>(p);
+		std::cout << "Type Class A\n";
+		return ;
+	}
+	catch (std::bad_cast){}
+
+	try {
+		(void)dynamic_cast<Bclass&>(p);
+		std::cout << "Type Class B\n";
+		return ;
+	}
+	catch (std::bad_cast){}
+
+	try {
+		(void)dynamic_cast<Cclass&>(p);
+		std::cout << "Type Class C\n";
+		return ;
+	}
+	catch (std::bad_cast){}
+}
