@@ -15,15 +15,16 @@ int	main () {
 
 			std::cout << "Object " << i + 1 << " created\n";
 			Base* object = generate();
-			Base* unknown = new Dclass();
+			// Base* unknown = new Dclass();
 
 			std::cout << "Object pointer: ";
 			identify(object);
 			std::cout << "Object reference: ";
 			identify(*object);
-			identify(unknown);
+			// identify(unknown);
 			std::cout << "\n";
 			delete object;
+			// delete unknown;
 		}
 		return 0;
 	}
