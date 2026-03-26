@@ -4,6 +4,10 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <limits>
+#include <cctype>
+#include <cstdlib>
+#include <string>
 
 class ScalarConverter {
 	private:
