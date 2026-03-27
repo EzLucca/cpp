@@ -48,12 +48,22 @@ void ScalarConverter::convert(const std::string& literal){
 
 	double value;
 
-	if (isPseudo(literal))
-		value = std::strtod(literal.c_str(), NULL);
-	else if(isChar(literal))
-		value = static_cast<double>(literal[0]);
-	else
-		value = std::strtod(literal.c_str(), NULL);
+	try {
+		if (isPseudo(literal))
+			value = std::stod(literal);
+		else if (isChar(literal))
+			value = static_cast<double>(literal[0]);
+		else
+			value = std::stod(literal);
+	}
+	catch (const std::invalid_argument&) {
+		std::cout << "Error: invalid literal\n";
+		return;
+	}
+	catch (const std::out_of_range&) {
+		std::cout << "Error: out of range\n";
+		return;
+	}
 
 	// char
 	std::cout << "char: ";
