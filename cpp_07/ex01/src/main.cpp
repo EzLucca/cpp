@@ -12,9 +12,9 @@ void	increment(F &x)
 	x++;
 }
 	template <typename F>
-void	shout(F &x)
+void	recipe(F &x)
 {
-	x = "One " + x;
+	x = "Add one " + x + "\n";
 }
 	template <typename F>
 void	uppermachine(F &x)
@@ -38,20 +38,21 @@ int main(){
 		std::cout << "Incremented: ";
 		iter(array, 5, print<int>);
 		std::cout << std::endl;
+		std::cout << "Array2: ";
 		iter(array2, 5, print<int>);
 
 	}
 	{
 		std::cout << "\n----- STRING TEST -----" << "\n";
-		std::string strArr[] = {"vanilla ice cream", "freezing coca cola", "good memory!!"};
+		std::string strArr[] = {"vanilla ice cream", "freezing coca cola", "crazy good memory!!"};
 
 		std::cout << "Original: ";
 		iter(strArr, 3, print<std::string>);
 		std::cout << std::endl;
 
-		iter(strArr, 3, shout<std::string>);
+		iter(strArr, 3, recipe<std::string>);
 
-		std::cout << "With exclamation: ";
+		std::cout << "Recipe:\n";
 		iter(strArr, 3, print<std::string>);
 		std::cout << std::endl;
 

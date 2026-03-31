@@ -27,13 +27,21 @@ int main(int, char**)
             return 1;
         }
     }
+
+	// printing the 10 numbers
+    for (int i = 0; i < 10; i++)
+    {
+		std::cout << i << ": "<< numbers[i] << "\n";
+    }
+
+	// testing out of bounds values
     try
     {
         numbers[-2] = 0;
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << "\n";
     }
     try
     {
@@ -41,7 +49,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << "\n";
     }
 
     for (int i = 0; i < MAX_VAL; i++)
