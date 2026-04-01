@@ -16,7 +16,7 @@ Array<T>::Array() : _array(nullptr), _size(0) {}
  * @param size Number of elements to allocate.
  */
 template <typename T>
-Array<T>::Array(unsigned int size) : _array(nullptr), _size(size){
+Array<T>::Array(unsigned int n_size) : _array(nullptr), _size(n_size){
 	if (_size > 0)
 		_array = new T[_size]();
 }
