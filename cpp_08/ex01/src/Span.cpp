@@ -1,34 +1,49 @@
-#include "include/Span.hpp"
+#include "Span.hpp"
 
-/**
- * @brief Default constructor.
- *
- * Initializes the Span with a default type.
- */
-Span::Span(void) {}
+Span::Span(unsigned int N) : _max_N(N), _number() {}
 
-/**
- * @brief Copy constructor.
- *
- * Creates a new Span by copying another one.
- *
- * @param other The Span object to copy from.
- */
-Span::Span(const Span &other) {}
+Span::Span(const Span &other) : _max_N(other._max_N), _number(other._number){}
 
-/**
- * @brief Copy assignment operator.
- *
- * Assigns the values of another Span to this instance.
- *
- * @param other The Span object to assign from.
- * @return Reference to the assigned Span.
- */
-Span &Span::operator=(const Span &other) {}
+Span &Span::operator=(const Span &other) {
+	if(this != &other)
+	{
+		_max_N = other._max_N;
+		_number = other._number;
+	}
+	return (*this);
+}
 
-/**
- * @brief Destructor.
- *
- * Called when the Span object is destroyed.
- */
-Span::~Span(void) {}
+Span::~Span() {}
+
+void	Span::addNumber(int number) {
+	if(_number.size() >= _max_N)
+		throw std::runtime_error("Cannot addNumber(): Span is full\n");
+	_number.push_back(number);
+}
+
+int	Span::shortestSpan() const {
+	if(_number.size() < 2)
+		throw std::runtime_error("Cannot find shortestSpan()\n");
+	std::vector<int> tmp(_number);
+	std::sort(tmp.begin(), tmp.end());
+
+	int	shortest = std::numeric_limits<int>::max();
+
+	for(size_t i = 1;i < tmp.size(); i++)
+	{
+		int	diff = tmp[i] - tmp[i - 1];
+		if(diff < shortest)
+			shortest = diff;
+	}
+	return shortest;
+};
+
+int	Span::longestSpan() const {
+	if(_number.size() < 2)
+		throw std::runtime_error("Cannot find shortestSpan()\n");
+
+	int	minVal = *std::min_element(_number.begin(), _number.end());
+	int maxVal = *std::max_element(_number.begin(), _number.end());
+
+	return maxVal - minVal;
+};

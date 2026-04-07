@@ -8,6 +8,7 @@ INC_DIR		:= include
 OBJ_DIR   	:= obj
 
 SRC      	:= main.cpp \
+			   Span.cpp
 
 SRCS       := $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ       	:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
