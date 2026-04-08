@@ -17,13 +17,13 @@ Span::~Span() {}
 
 void	Span::addNumber(int number) {
 	if(_number.size() >= _max_N)
-		throw std::runtime_error("Cannot addNumber(): Span is full\n");
+		throw std::runtime_error("Cannot addNumber()");
 	_number.push_back(number);
 }
 
 int	Span::shortestSpan() const {
 	if(_number.size() < 2)
-		throw std::runtime_error("Cannot find shortestSpan()\n");
+		throw std::runtime_error("Cannot find shortestSpan()");
 	std::vector<int> tmp(_number);
 	std::sort(tmp.begin(), tmp.end());
 
@@ -40,7 +40,7 @@ int	Span::shortestSpan() const {
 
 int	Span::longestSpan() const {
 	if(_number.size() < 2)
-		throw std::runtime_error("Cannot find shortestSpan()\n");
+		throw std::runtime_error("Cannot find longestSpan()");
 
 	int	minVal = *std::min_element(_number.begin(), _number.end());
 	int maxVal = *std::max_element(_number.begin(), _number.end());
