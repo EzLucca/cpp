@@ -38,11 +38,11 @@ int main()
 		std::cout << " ----- Test normal ----- \n";
 
 		Span sp = Span(5);
-		sp.addNumber(6);
-		sp.addNumber(3);
-		sp.addNumber(17);
-		sp.addNumber(9);
-		sp.addNumber(11);
+		testFunction([&]() { return sp.addNumber(6); });
+		testFunction([&]() { return sp.addNumber(3); });
+		testFunction([&]() { return sp.addNumber(17); });
+		testFunction([&]() { return sp.addNumber(9); });
+		testFunction([&]() { return sp.addNumber(11); });
 		testFunction([&]() { return sp.shortestSpan(); });
 		testFunction([&]() { return sp.longestSpan(); });
 	}
@@ -55,7 +55,7 @@ int main()
 
 		for (int i = 0; i < 10000; ++i) {
 			int num = std::rand() % 10000;
-			sp.addNumber(num);
+			testFunction([&]() { return sp.addNumber(num); });
 		}
 		testFunction([&]() { return sp.shortestSpan(); });
 		testFunction([&]() { return sp.longestSpan(); });
