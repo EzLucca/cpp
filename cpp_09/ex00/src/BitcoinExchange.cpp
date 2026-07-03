@@ -7,31 +7,23 @@
 
 BitcoinExchange::BitcoinExchange(const std::string& file) : _dataBase(file) {}
 
-bool BitcoinExchange::loadDataBase(const std::string& filename)
+BitcoinExchange::BitcoinExchange() {}
+
+static std::string trim(const std::string& s)
 {
-    std::ifstream file(filename.c_str());
-    if (!file.is_open())
-        return false;
+    size_t start = 0;
+    while (start < s.size() && std::isspace(s[start]))
+        ++start;
 
-    std::string line;
-    std::getline(file, line); // skip header
+    size_t end = s.size();
+    while (end > start && std::isspace(s[end - 1]))
+        --end;
 
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        std::string date, value;
-
-        if (std::getline(ss, date, ',') && std::getline(ss, value)) {
-            _dataPairs[date] = std::atof(value.c_str());
-        }
-    }
-    return true;
+    return s.substr(start, end - start);
 }
 
-
-BitcoinExchange::BitcoinExchange() {}
-BitcoinExchange::~BitcoinExchange() {}
-
-bool BitcoinExchange::isValidDate(const std::string& date) {
+bool BitcoinExchange::isValidDate(const std::string& date) 
+{
     if (date.size() != 10)
         return false;
     if (date[4] != '-' || date[7] != '-')
@@ -48,19 +40,39 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
     return true;
 }
 
-bool BitcoinExchange::isValidValue(const std::string& valueStr, float &value) {
+bool BitcoinExchange::parseFloat(const std::string& str, float& value)
+{
     char* end;
-    value = std::strtof(valueStr.c_str(), &end);
-    if (*end != '\0')
+
+    value = std::strtof(str.c_str(), &end);
+
+    return (*end == '\0');
+}
+
+bool BitcoinExchange::isValidExchangeRate(const std::string& str, float& value)
+{
+    if (!parseFloat(str, value))
         return false;
+
+    return value >= 0;
+}
+
+bool BitcoinExchange::isValidInputValue(const std::string& str, float& value)
+{
+    if (!parseFloat(str, value))
+        return false;
+
     if (value < 0)
         return false;
+
     if (value > 1000)
         return false;
+
     return true;
 }
 
-bool BitcoinExchange::loadDatabase(const std::string& filename) {
+bool BitcoinExchange::loadDataBase(const std::string& filename)
+{
     std::ifstream file(filename.c_str());
     if (!file.is_open())
         return false;
@@ -68,18 +80,36 @@ bool BitcoinExchange::loadDatabase(const std::string& filename) {
     std::string line;
     std::getline(file, line); // skip header
 
-    while (std::getline(file, line)) {
+    while (std::getline(file, line))
+    {
         std::stringstream ss(line);
-        std::string date, value;
+        std::string date;
+        std::string valueStr;
 
-        if (std::getline(ss, date, ',') && std::getline(ss, value)) {
-            _dataPairs[date] = std::atof(value.c_str());
+        if (!std::getline(ss, date, ',') || !std::getline(ss, valueStr))
+        {
+            std::cerr << "Error: bad database line => " << line << std::endl;
+            continue;
         }
+        if (!isValidDate(date))
+        {
+            std::cerr << "Error: invalid date => " << date << std::endl;
+            continue;
+        }
+        float value;
+        if (!isValidExchangeRate(valueStr, value))
+        {
+            std::cerr << "Error: invalid value => " << valueStr << std::endl;
+            continue;
+        }
+        _dataPairs[date] = value;
+        // std::cout << date << " => " << value  << std::endl;
     }
     return true;
 }
 
-void BitcoinExchange::processInput(const std::string& filename) {
+void BitcoinExchange::processInput(const std::string& filename) 
+{
     std::ifstream file(filename.c_str());
     if (!file.is_open()) {
         std::cerr << "Error: could not open file." << std::endl;
@@ -87,28 +117,32 @@ void BitcoinExchange::processInput(const std::string& filename) {
     }
 
     std::string line;
-    std::getline(file, line); // header
+    std::getline(file, line);
 
-    while (std::getline(file, line)) {
+    while (std::getline(file, line))
+    {
         std::stringstream ss(line);
         std::string date, valueStr;
 
-        if (!std::getline(ss, date, '|') || !std::getline(ss, valueStr)) {
+        if (!std::getline(ss, date, '|') || !std::getline(ss, valueStr))
+        {
             std::cerr << "Error: bad input => " << line << std::endl;
             continue;
         }
 
         // trim spaces
-        if (valueStr.size() > 0 && valueStr[0] == ' ')
-            valueStr.erase(0, 1);
+        date = trim(date);
+        valueStr = trim(valueStr);
 
-        if (!isValidDate(date)) {
+        if (!isValidDate(date))
+        {
             std::cerr << "Error: bad input => " << line << std::endl;
             continue;
         }
 
         float value;
-        if (!isValidValue(valueStr, value)) {
+        if (!isValidInputValue(valueStr, value))
+        {
             if (value < 0)
                 std::cerr << "Error: not a positive number." << std::endl;
             else if (value > 1000)
@@ -120,8 +154,10 @@ void BitcoinExchange::processInput(const std::string& filename) {
 
         std::map<std::string, float>::iterator it = _dataPairs.lower_bound(date);
 
-        if (it == _dataPairs.end() || it->first != date) {
-            if (it == _dataPairs.begin()) {
+        if (it == _dataPairs.end() || it->first != date)
+        {
+            if (it == _dataPairs.begin())
+            {
                 std::cerr << "Error: no earlier date available." << std::endl;
                 continue;
             }
