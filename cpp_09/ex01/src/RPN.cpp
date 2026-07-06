@@ -23,19 +23,25 @@ void    RPN::evaluate(const std::string& input)
 
     while (ss >> token)
     {
+        std::string operation;
         if (token.size() == 1 && std::isdigit(token[0]))
         {
             value = token[0] - '0';
             _stack.push(value);
+            std::cout << token[0] << std::endl;
         }
+        else
+            operation = token[0];
         if (_stack.size() < 2)
             continue ;
         rhs = _stack.top();
         _stack.pop();
 
+        std::cout << "rhs: " << rhs << std::endl;
         lhs = _stack.top();
         _stack.pop();
 
+        std::cout << "lhs: " << lhs << std::endl;
         switch (token[0])
         {
             case '+':
