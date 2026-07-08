@@ -9,6 +9,5 @@ int main(int argc, char **argv)
         return(1);
     
     RPN calculator;
-    calculator.evaluate(argv[1]);
-    calculator.printStack();
+    calculator.calculate(argv[1]);
 }

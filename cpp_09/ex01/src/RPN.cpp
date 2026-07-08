@@ -1,68 +1,64 @@
 #include "RPN.hpp"
-#include <sstream>
 #include <cctype>
+#include <sstream>
 
-void RPN::printStack() const
+void    RPN::compute(const std::string &token)
 {
-    std::stack<int> copy = _stack;
 
-    while (!copy.empty())
+    int result = 0;
+    int rhs = _stack.top();
+    _stack.pop();
+    int lhs = _stack.top();
+    _stack.pop();
+
+    switch (token[0])
     {
-        std::cout << copy.top() << std::endl;
-        copy.pop();
+        case '+':
+            result = lhs + rhs;
+            break;
+        case '-':
+            result = lhs - rhs;
+            break;
+        case '*':
+            result = lhs * rhs;
+            break;
+        case '/':
+            if (rhs == 0) {
+                std::cerr << "Division by zero\n";
+                return;
+            }
+            result = lhs / rhs;
+            break;
+        default:
+            std::cerr << "Invalid operator\n";
+            return;
     }
+
+    _stack.push(result);
 }
-void    RPN::evaluate(const std::string& input)
-{
+
+void RPN::calculate(const std::string &input) {
     std::stringstream ss(input);
     std::string token;
-    int value;
-    int rhs = 0;
-    int lhs = 0;
-    int result = 0;
+    std::string operation;
 
-    while (ss >> token)
-    {
-        std::string operation;
-        if (token.size() == 1 && std::isdigit(token[0]))
+    while (ss >> token) {
+        if (token.size() == 1 && std::isdigit(token[0])) 
         {
-            value = token[0] - '0';
-            _stack.push(value);
-            std::cout << token[0] << std::endl;
+            _stack.push(token[0] - '0');
+            continue;
         }
-        else
-            operation = token[0];
-        if (_stack.size() < 2)
-            continue ;
-        rhs = _stack.top();
-        _stack.pop();
-
-        std::cout << "rhs: " << rhs << std::endl;
-        lhs = _stack.top();
-        _stack.pop();
-
-        std::cout << "lhs: " << lhs << std::endl;
-        switch (token[0])
+        if (_stack.size() < 2 )
         {
-            case '+':
-                result = lhs + rhs;
-                break;
-            case '-':
-                result = lhs - rhs;
-                break;
-            case '*':
-                result = lhs * rhs;
-                break;
-            case '/':
-                if (rhs == '0')
-                    std::cerr << "Not divisible by 0" << std::endl;
-                else
-                    result = lhs / rhs;
-                break;
+            std::cerr << "Error: insufficient operands\n";
+            return;
         }
-        _stack.push(result);
-        std::cout << result << std::endl;
+
+        compute(token);
     }
-    // math operations
-
+    if (_stack.size() != 1) {
+        std::cerr << "Invalid RPN expression\n";
+        return;
+    }
+    std::cout << _stack.top() << std::endl;
 }

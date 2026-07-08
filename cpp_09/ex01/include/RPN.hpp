@@ -8,7 +8,6 @@ class RPN
         std::stack<int> _stack;
 
     public:
-        void evaluate(const std::string& expression);
-
-        void    printStack() const;
+        void    calculate(const std::string& expression);
+        void    compute(const std::string &token);
 };
