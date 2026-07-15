@@ -4,7 +4,10 @@ int main (int argc, char **argv)
 {
     // validate argvs to create unsorted list
     if (argc < 2)
+    {
         std::cerr << "./program args[...]" << std::endl;
+        return 1;
+    }
 
     std::vector<unsigned int> sequence;
 	std::deque<unsigned int> sequenceDeq;
@@ -14,6 +17,7 @@ int main (int argc, char **argv)
 
     if(!fJ.isPositiveInteger(argc, argv, sequence, sequenceDeq))
         exit(1);
+
     timeVec = fJ.sortVector(sequence);
     timeDeq = fJ.sortDeque(sequenceDeq);
 

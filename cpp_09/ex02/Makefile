@@ -16,6 +16,9 @@ INCLUDES 	:= -I$(INC_DIR)
 
 all: $(NAME)
 
+debug: CFLAGS += -DDEBUG
+debug: re
+
 $(NAME): $(OBJ)
 	@$(C++) $(OBJ) -o $@
 	@echo "Build $(NAME) successfully!"
@@ -35,4 +38,4 @@ fclean: clean
 re: fclean all
 
 .SECONDARY: $(OBJ)
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug

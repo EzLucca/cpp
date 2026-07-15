@@ -10,6 +10,12 @@
 #include <algorithm>
 #include <iomanip>
 
+#ifdef DEBUG
+#define DBG(x) do { x; } while (0)
+#else
+#define DBG(x) do {} while (0)
+#endif
+
 class PmergeMe
 {
     private:
@@ -28,41 +34,29 @@ class PmergeMe
         void    printResults(std::vector<unsigned int> sequence,
                 std::chrono::nanoseconds timeVec,
                 std::chrono::nanoseconds timeDeq);
-        std::vector<std::pair<unsigned int, unsigned int>>  pairsSwap(std::vector<unsigned int>& vector);
 
+        std::vector<std::pair<unsigned int, unsigned int>>  pairsSwap(std::vector<unsigned int>& vector);
         std::vector<std::pair<unsigned int, unsigned int>>  sortPairs(std::vector<std::pair<unsigned int, unsigned int>> sortedPairs);
+
+        std::deque<std::pair<unsigned int, unsigned int>>   pairsSwap(std::deque<unsigned int>& deque);
+        std::deque<std::pair<unsigned int, unsigned int>>   sortPairs(std::deque<std::pair<unsigned int, unsigned int>> pairs);
+
         std::vector<unsigned int> getVector();
         std::deque<unsigned int> getDeque();
-        template <typename Container>
-            static void binaryInsert(int value, Container& container);
+        std::vector<size_t> generateJacobsthal(size_t size);
 
         template <typename Container>
-            static void binaryInsertPairs(const std::pair<int, int>& pair,
+            static void binaryInsert(typename Container::value_type value, Container& container);
+
+        template <typename Container>
+            static void binaryInsertPairs( const typename Container::value_type& pair,
                     Container& container);
+
+        template <typename Container>
+            void printPairs(const Container& pairs);
+
+        template <typename Container>
+            void printContainer(const Container& container);
 };
 
-template <typename Container>
-void PmergeMe::binaryInsert(int value, Container& container)
-{
-    typename Container::iterator pos =
-        std::upper_bound(container.begin(), container.end(), value);
-    container.insert(pos, value);
-}
-
-struct ComparePairs
-{
-    bool operator()(const std::pair<int, int>& a,
-                    const std::pair<int, int>& b) const
-    {
-        return a.first < b.first;
-    }
-};
-
-template <typename Container>
-void PmergeMe::binaryInsertPairs(const std::pair<int, int>& pair,
-                                 Container& container)
-{
-    typename Container::iterator pos =
-        std::upper_bound(container.begin(), container.end(), pair, ComparePairs());
-    container.insert(pos, pair);
-}
+#include "PmergeMe.tpp"
