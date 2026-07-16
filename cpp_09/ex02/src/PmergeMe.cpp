@@ -86,10 +86,9 @@ std::vector<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::vect
             losers.push_back(pairs[i]);
         }
     }	
-    DBG(std::cout << "winners" << std::endl;);
-    DBG(printPairs(winners));
-    DBG(std::cout << "losers" << std::endl;);
-    DBG(printPairs(losers));
+    DBG(std::cout << "winners: "; printPairs(winners););
+    DBG(std::cout << "losers: "; printPairs(losers););
+
     winners = sortPairs(winners);
     std::vector<std::pair<unsigned int, unsigned int>> result;
     result.push_back(winners[0]);
@@ -97,15 +96,13 @@ std::vector<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::vect
         result.push_back(winners[i]);
     for (size_t i = 0; i < losers.size(); i++)
     {
-        binaryInsertPairs(losers[i], result); // TODO:
-        DBG(std::cout << "inserting[" << i << "]: " << std::endl;);
-        DBG(printPairs(result));
+        binaryInsertPairs(losers[i], result);
+        DBG(std::cout << "inserting: " << RED << i << RESET; printPairs(result););
     }	
     if (isOdd)
     {
         binaryInsertPairs(unpaired, result);
-        DBG(std::cout << "unpaired: " << std::endl;);
-        DBG(printPairs(result));
+        DBG(std::cout << "unpaired: "; printPairs(result););
     }
     return result;
 }
@@ -118,7 +115,8 @@ std::vector<unsigned int> PmergeMe::fordJohnson(std::vector<unsigned int>& vecto
     bool isOdd = vector.size() % 2;
     unsigned int unpaired = 0; 
 
-    if (isOdd){
+    if (isOdd)
+    {
         unpaired = vector.back();
         vector.pop_back();
     }
@@ -143,26 +141,21 @@ std::vector<unsigned int> PmergeMe::fordJohnson(std::vector<unsigned int>& vecto
     // Remove the first pending item because b1 is already inserted
     pending.erase(pending.begin());
 
-    DBG(std::cout << "mainChain: " << std::endl;);
-    DBG(printContainer(mainChain));
-    DBG(std::cout << "pending: "<< std::endl;);
-    DBG(printContainer(pending));
+    DBG(std::cout << "mainChain: "; printContainer(mainChain););
+    DBG(std::cout << "pending: "; printContainer(pending););
 
     std::vector<size_t> insertionOrder = generateJacobsthal(pending.size());
     for (size_t index : insertionOrder)
     {
         binaryInsert(pending[index], mainChain);
-        DBG(std::cout << "JacobSthal index: " << index + 1 << std::endl;);
-        DBG(printContainer(mainChain));
+        DBG(std::cout << "JacobSthal index[" << index + 1 << "]: "; printContainer(mainChain););
     }
 
     if (isOdd)
     {
         binaryInsert(unpaired, mainChain);
-        DBG(std::cout << "unpaired: " << std::endl;);
-        DBG(printContainer(mainChain));
+        DBG(std::cout << "unpaired: "; printContainer(mainChain););
     }
-
     return mainChain;
 }
 
@@ -249,10 +242,8 @@ std::deque<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::deque
         }
     }	
 
-    DBG(std::cout << "winners" << std::endl;);
-    DBG(printPairs(winners));
-    DBG(std::cout << "losers" << std::endl;);
-    DBG(printPairs(losers));
+    DBG(std::cout << "winners: "; printPairs(winners););
+    DBG(std::cout << "losers: "; printPairs(losers););
 
     winners = sortPairs(winners);
     std::deque<std::pair<unsigned int, unsigned int>> result;
@@ -262,14 +253,12 @@ std::deque<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::deque
     for (size_t i = 0; i < losers.size(); i++)
     {
         binaryInsertPairs(losers[i], result);
-        DBG(std::cout << "inserting[" << i << "]: " << std::endl);
-        DBG(printPairs(result));
+        DBG(std::cout << "inserting[" << i << "]: "; printPairs(result););
     }	
     if (isOdd)
     {
         binaryInsertPairs(unpaired, result);
-        DBG(std::cout << "unpaired: " << std::endl;);
-        DBG(printPairs(result));
+        DBG(std::cout << "unpaired: "; printPairs(result););
     }
     return result;
 }
@@ -305,25 +294,21 @@ std::deque<unsigned int> PmergeMe::fordJohnson(std::deque<unsigned int>& deque)
 
     // Remove the first pending item because b1 is already inserted
     pending.erase(pending.begin());
-    DBG(std::cout << "mainChain: " << std::endl;);
-    DBG(printContainer(mainChain));
-    DBG(std::cout << "pending: " << std::endl;);
-    DBG(printContainer(pending));
+
+    DBG(std::cout << "mainChain: "; printContainer(mainChain););
+    DBG(std::cout << "pending: "; printContainer(pending););
+
     std::vector<size_t> insertionOrder = generateJacobsthal(pending.size());
     for (size_t index : insertionOrder)
     {
         binaryInsert(pending[index], mainChain);
-        DBG(std::cout << "JacobSthal index: " << index + 1 << std::endl;);
-        DBG(printContainer(mainChain));
+        DBG(std::cout << "JacobSthal index[" << index + 1 << "]: "; printContainer(mainChain););
     }
-
     if (isOdd)
     {
         binaryInsert(unpaired, mainChain);
-        DBG(std::cout << "unpaired: " << std::endl;);
-        DBG(printContainer(mainChain));
+        DBG(std::cout << "unpaired: "; printContainer(mainChain););
     }
-
     return mainChain;
 }
 

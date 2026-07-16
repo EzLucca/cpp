@@ -5,10 +5,10 @@
 void    RPN::compute(const std::string &token)
 {
 
-    int result = 0;
-    int rhs = _stack.top();
+    long long result = 0;
+    long long rhs = _stack.top();
     _stack.pop();
-    int lhs = _stack.top();
+    long long lhs = _stack.top();
     _stack.pop();
 
     switch (token[0])

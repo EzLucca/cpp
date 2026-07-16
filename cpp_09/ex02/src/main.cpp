@@ -2,7 +2,6 @@
 
 int main (int argc, char **argv)
 {
-    // validate argvs to create unsorted list
     if (argc < 2)
     {
         std::cerr << "./program args[...]" << std::endl;

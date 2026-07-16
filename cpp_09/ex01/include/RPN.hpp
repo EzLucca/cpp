@@ -5,7 +5,7 @@
 class RPN
 {
     private:
-        std::stack<int> _stack;
+        std::stack<long long> _stack;
 
     public:
         void    calculate(const std::string& expression);

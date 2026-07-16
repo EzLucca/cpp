@@ -29,15 +29,16 @@ bool BitcoinExchange::isValidDate(const std::string& date)
     if (date[4] != '-' || date[7] != '-')
         return false;
 
-    int y = std::atoi(date.substr(0,4).c_str());
-    int m = std::atoi(date.substr(5,2).c_str());
-    int d = std::atoi(date.substr(8,2).c_str());
+    int year = std::stoi(date.substr(0,4));
+    int month = std::stoi(date.substr(5,2));
+    int day = std::stoi(date.substr(8,2));
 
-    if (m < 1 || m > 12 || d < 1 || d > 31)
-        return false;
-    if (y < 0)
-        return false;
-    return true;
+    std::chrono::year_month_day ymd {
+        std::chrono::year{year},
+            std::chrono::month{static_cast<unsigned>(month)},
+            std::chrono::day{static_cast<unsigned>(day)}
+    };
+    return ymd.ok();
 }
 
 bool BitcoinExchange::parseFloat(const std::string& str, float& value)

@@ -16,6 +16,9 @@
 #define DBG(x) do {} while (0)
 #endif
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+
 class PmergeMe
 {
     private:
