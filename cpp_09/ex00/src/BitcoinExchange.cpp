@@ -5,18 +5,16 @@
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(const std::string& file) : _dataBase(file) {}
-
 BitcoinExchange::BitcoinExchange() {}
 
 static std::string trim(const std::string& s)
 {
     size_t start = 0;
-    while (start < s.size() && std::isspace(s[start]))
+    while (start < s.size() && std::isspace(static_cast<unsigned char>(s[start])))
         ++start;
 
     size_t end = s.size();
-    while (end > start && std::isspace(s[end - 1]))
+    while (end > start && std::isspace(static_cast<unsigned char>(s[end - 1])))
         --end;
 
     return s.substr(start, end - start);
@@ -28,26 +26,47 @@ bool BitcoinExchange::isValidDate(const std::string& date)
         return false;
     if (date[4] != '-' || date[7] != '-')
         return false;
+    try
+    {
+        int year = std::stoi(date.substr(0, 4));
+        int month = std::stoi(date.substr(5, 2));
+        int day = std::stoi(date.substr(8, 2));
 
-    int year = std::stoi(date.substr(0,4));
-    int month = std::stoi(date.substr(5,2));
-    int day = std::stoi(date.substr(8,2));
+        std::chrono::year_month_day ymd{
+            std::chrono::year{year},
+                std::chrono::month{static_cast<unsigned>(month)},
+                std::chrono::day{static_cast<unsigned>(day)}
+        };
 
-    std::chrono::year_month_day ymd {
-        std::chrono::year{year},
-            std::chrono::month{static_cast<unsigned>(month)},
-            std::chrono::day{static_cast<unsigned>(day)}
-    };
-    return ymd.ok();
+        return ymd.ok();
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
 
 bool BitcoinExchange::parseFloat(const std::string& str, float& value)
 {
-    char* end;
+    if (str.empty())
+        return false;
 
+    char* end = NULL;
     value = std::strtof(str.c_str(), &end);
 
-    return (*end == '\0');
+    // No characters were converted
+    if (end == str.c_str())
+        return false;
+
+    // Extra characters after the number
+    if (*end != '\0')
+        return false;
+
+    // Reject NaN and infinity
+    if (!std::isfinite(value))
+        return false;
+
+    return true;
 }
 
 bool BitcoinExchange::isValidExchangeRate(const std::string& str, float& value)
@@ -58,22 +77,9 @@ bool BitcoinExchange::isValidExchangeRate(const std::string& str, float& value)
     return value >= 0;
 }
 
-bool BitcoinExchange::isValidInputValue(const std::string& str, float& value)
-{
-    if (!parseFloat(str, value))
-        return false;
-
-    if (value < 0)
-        return false;
-
-    if (value > 1000)
-        return false;
-
-    return true;
-}
-
 bool BitcoinExchange::loadDataBase(const std::string& filename)
 {
+    _dataPairs.clear();
     std::ifstream file(filename.c_str());
     if (!file.is_open())
         return false;
@@ -97,7 +103,7 @@ bool BitcoinExchange::loadDataBase(const std::string& filename)
             std::cerr << "Error: invalid date => " << date << std::endl;
             continue;
         }
-        float value;
+        float value = 0.0f;
         if (!isValidExchangeRate(valueStr, value))
         {
             std::cerr << "Error: invalid value => " << valueStr << std::endl;
@@ -141,18 +147,25 @@ void BitcoinExchange::processInput(const std::string& filename)
             continue;
         }
 
-        float value;
-        if (!isValidInputValue(valueStr, value))
+        float value = 0.0f;
+
+        if (!parseFloat(valueStr, value))
         {
-            if (value < 0)
-                std::cerr << "Error: not a positive number." << std::endl;
-            else if (value > 1000)
-                std::cerr << "Error: too large a number." << std::endl;
-            else
-                std::cerr << "Error: bad input => " << line << std::endl;
+            std::cerr << "Error: bad input => " << line << std::endl;
             continue;
         }
 
+        if (value < 0)
+        {
+            std::cerr << "Error: not a positive number." << std::endl;
+            continue;
+        }
+
+        if (value > 1000)
+        {
+            std::cerr << "Error: too large a number." << std::endl;
+            continue;
+        }
         std::map<std::string, float>::iterator it = _dataPairs.lower_bound(date);
 
         if (it == _dataPairs.end() || it->first != date)
