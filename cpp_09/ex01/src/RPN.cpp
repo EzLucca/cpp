@@ -2,14 +2,14 @@
 #include <cctype>
 #include <sstream>
 
-void    RPN::compute(const std::string &token)
+bool    RPN::compute(const std::string &token)
 {
 
-    long long result = 0;
     long long rhs = _stack.top();
     _stack.pop();
     long long lhs = _stack.top();
     _stack.pop();
+    long long result = 0;
 
     switch (token[0])
     {
@@ -23,41 +23,54 @@ void    RPN::compute(const std::string &token)
             result = lhs * rhs;
             break;
         case '/':
-            if (rhs == 0) {
-                std::cerr << "Division by zero\n";
-                return;
+            if (rhs == 0)
+            {
+                _stack.push(lhs);
+                _stack.push(rhs);
+                std::cerr << "Error\n";
+                return false;
             }
             result = lhs / rhs;
             break;
         default:
             std::cerr << "Invalid operator\n";
-            return;
+            return false;
     }
-
     _stack.push(result);
+    return true;
 }
 
-void RPN::calculate(const std::string &input) {
+void RPN::calculate(const std::string &input)
+{
     std::stringstream ss(input);
     std::string token;
-    std::string operation;
 
-    while (ss >> token) {
-        if (token.size() == 1 && std::isdigit(token[0])) 
+    while (ss >> token)
+    {
+        if (token.size() == 1 && std::isdigit(token[0]))
         {
             _stack.push(token[0] - '0');
-            continue;
         }
-        if (_stack.size() < 2 )
+        else if (token == "+" || token == "-" ||
+                token == "*" || token == "/")
         {
-            std::cerr << "Error: insufficient operands\n";
+            if (_stack.size() < 2)
+            {
+                std::cerr << "Error\n";
+                return;
+            }
+            if(!compute(token))
+                return;
+        }
+        else
+        {
+            std::cerr << "Error\n";
             return;
         }
-
-        compute(token);
     }
-    if (_stack.size() != 1) {
-        std::cerr << "Invalid RPN expression\n";
+    if (_stack.size() != 1)
+    {
+        std::cerr << "Error\n";
         return;
     }
     std::cout << _stack.top() << std::endl;

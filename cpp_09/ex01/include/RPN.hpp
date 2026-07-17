@@ -9,5 +9,5 @@ class RPN
 
     public:
         void    calculate(const std::string& expression);
-        void    compute(const std::string &token);
+        bool    compute(const std::string &token);
 };
