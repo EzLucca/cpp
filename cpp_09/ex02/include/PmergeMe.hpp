@@ -38,18 +38,22 @@ class PmergeMe
                 std::chrono::nanoseconds timeVec,
                 std::chrono::nanoseconds timeDeq);
 
+        void printPair(const std::pair<unsigned int, unsigned int>& p);
+
         std::vector<std::pair<unsigned int, unsigned int>>  pairsSwap(std::vector<unsigned int>& vector);
-        std::vector<std::pair<unsigned int, unsigned int>>  sortPairs(std::vector<std::pair<unsigned int, unsigned int>> sortedPairs);
+        std::vector<std::pair<unsigned int, unsigned int>>  sortPairs(const std::vector<std::pair<unsigned int, unsigned int>> &pairs);
+
 
         std::deque<std::pair<unsigned int, unsigned int>>   pairsSwap(std::deque<unsigned int>& deque);
-        std::deque<std::pair<unsigned int, unsigned int>>   sortPairs(std::deque<std::pair<unsigned int, unsigned int>> pairs);
+        std::deque<std::pair<unsigned int, unsigned int>>   sortPairs(const std::deque<std::pair<unsigned int, unsigned int>> &pairs);
 
         std::vector<unsigned int> getVector();
         std::deque<unsigned int> getDeque();
         std::vector<size_t> generateJacobsthal(size_t size);
 
         template <typename Container>
-            static void binaryInsert(typename Container::value_type value, Container& container);
+            size_t binaryInsert( typename Container::value_type value, Container& container,
+                    size_t limit);
 
         template <typename Container>
             static void binaryInsertPairs( const typename Container::value_type& pair,

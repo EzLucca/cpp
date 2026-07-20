@@ -3,14 +3,22 @@
 #include <iostream>
 #include <algorithm>
 
-    template <typename Container>
-void PmergeMe::binaryInsert(typename Container::value_type value, Container& container)
+template <typename Container>
+size_t PmergeMe::binaryInsert( typename Container::value_type value, Container& container,
+    size_t limit)
 {
-    typename Container::iterator pos =
-        std::upper_bound(container.begin(), container.end(), value);
-    container.insert(pos, value);
-}
+    auto pos = std::lower_bound(
+        container.begin(),
+        container.begin() + limit,
+        value
+    );
 
+    size_t index = pos - container.begin();
+
+    container.insert(pos, value);
+
+    return index;
+}
 struct ComparePairs
 {
     template <typename T>

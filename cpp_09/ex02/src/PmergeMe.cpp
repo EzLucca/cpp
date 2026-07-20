@@ -1,5 +1,10 @@
 #include "PmergeMe.hpp"
 
+void PmergeMe::printPair(const std::pair<unsigned int, unsigned int>& p)
+{
+    std::cout << "(" << p.first << ", " << p.second << ")";
+}
+
     std::chrono::nanoseconds
 PmergeMe::sortVector(std::vector<unsigned int> &input)
 {
@@ -19,21 +24,22 @@ std::chrono::nanoseconds PmergeMe::sortDeque(std::deque<unsigned int> &input)
     return stop - start;
 }
 
-bool PmergeMe::isPositiveInteger(int argc,
-        char **argv,
+bool PmergeMe::isPositiveInteger(int argc, char **argv,
         std::vector<unsigned int>& sequence,
         std::deque<unsigned int>& sequenceDeq)
 {
     _vector.clear();
     _deque.clear();
 
-    for (int i = 1; i < argc; ++i) {
+    for (int i = 1; i < argc; ++i)
+    {
         std::string_view sv(argv[i]);
 
         unsigned int value{};
-        auto [ptr, ec] = std::from_chars(sv.data(), sv.data() + sv.size(), value);
+        // from_chars return pointer and error
+        auto [ptr, errorcode] = std::from_chars(sv.data(), sv.data() + sv.size(), value);
 
-        if (ec != std::errc{} || ptr != sv.data() + sv.size()) {
+        if (errorcode != std::errc{} || ptr != sv.data() + sv.size()) {
             return false;
         }
         sequence.push_back(value);
@@ -57,7 +63,8 @@ std::vector<std::pair<unsigned int, unsigned int>>   PmergeMe::pairsSwap(std::ve
     return pairs;
 }
 
-std::vector<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::vector<std::pair<unsigned int, unsigned int>> pairs)
+std::vector<std::pair<unsigned int, unsigned int>> 
+PmergeMe::sortPairs(const std::vector<std::pair<unsigned int, unsigned int>>& pairs)
 {
     if (pairs.size() <= 1)
         return pairs;
@@ -65,15 +72,18 @@ std::vector<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::vect
     std::vector<std::pair<unsigned int, unsigned int>> winners;
     std::vector<std::pair<unsigned int, unsigned int>> losers;
 
-    bool isOdd = pairs.size() % 2;
-    std::pair<unsigned int, unsigned int>  unpaired; 
+    size_t size = pairs.size();
+    bool isOdd = size % 2;
 
-    if (isOdd){
+    std::pair<unsigned int, unsigned int> unpaired;
+
+    if (isOdd)
+    {
         unpaired = pairs.back();
-        pairs.pop_back();
+        size--;   // ignore last element
     }
 
-    for (size_t i = 0; i < pairs.size(); i +=2)
+    for (size_t i = 0; i < size; i += 2)
     {
         if (pairs[i].first > pairs[i + 1].first)
         {
@@ -85,25 +95,36 @@ std::vector<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::vect
             winners.push_back(pairs[i + 1]);
             losers.push_back(pairs[i]);
         }
-    }	
+    }
+
     DBG(std::cout << "winners: "; printPairs(winners););
     DBG(std::cout << "losers: "; printPairs(losers););
 
     winners = sortPairs(winners);
+
     std::vector<std::pair<unsigned int, unsigned int>> result;
     result.push_back(winners[0]);
+
     for (size_t i = 1; i < winners.size(); i++)
         result.push_back(winners[i]);
+
     for (size_t i = 0; i < losers.size(); i++)
     {
         binaryInsertPairs(losers[i], result);
-        DBG(std::cout << "inserting: " << RED << i << RESET; printPairs(result););
+        DBG(std::cout << "inserting " << RED;
+                printPair(losers[i]);
+                std::cout << RESET << " -> ";
+                printPairs(result););
     }	
     if (isOdd)
     {
         binaryInsertPairs(unpaired, result);
-        DBG(std::cout << "unpaired: "; printPairs(result););
+        DBG(std::cout << "unpaired " << RED;
+                printPair(unpaired);
+                std::cout << RESET << " -> ";
+                printPairs(result););
     }
+
     return result;
 }
 
@@ -120,6 +141,7 @@ std::vector<unsigned int> PmergeMe::fordJohnson(std::vector<unsigned int>& vecto
         unpaired = vector.back();
         vector.pop_back();
     }
+    DBG(std::cout << RED << "\n--- Starting Vector ---" << RESET << std::endl);
     std::vector<std::pair<unsigned int, unsigned int>> pairs;
     DBG(std::cout << "Starting to swap inner pairs." << std::endl;);
     pairs = pairsSwap(vector);
@@ -131,15 +153,19 @@ std::vector<unsigned int> PmergeMe::fordJohnson(std::vector<unsigned int>& vecto
 
     std::vector<unsigned int> mainChain;
     std::vector<unsigned int> pending;
+    std::vector<size_t> limits;
 
     mainChain.push_back(sortedPairs[0].second);
-    for (const auto& pair: sortedPairs){
-        mainChain.push_back(pair.first);
-        pending.push_back(pair.second);
-    }
+    for (size_t i = 0; i < sortedPairs.size(); i++)
+    {
+        mainChain.push_back(sortedPairs[i].first);
 
-    // Remove the first pending item because b1 is already inserted
-    pending.erase(pending.begin());
+        if (i > 0)
+        {
+            pending.push_back(sortedPairs[i].second);
+            limits.push_back(i + 1);
+        }
+    }
 
     DBG(std::cout << "mainChain: "; printContainer(mainChain););
     DBG(std::cout << "pending: "; printContainer(pending););
@@ -147,14 +173,28 @@ std::vector<unsigned int> PmergeMe::fordJohnson(std::vector<unsigned int>& vecto
     std::vector<size_t> insertionOrder = generateJacobsthal(pending.size());
     for (size_t index : insertionOrder)
     {
-        binaryInsert(pending[index], mainChain);
-        DBG(std::cout << "JacobSthal index[" << index + 1 << "]: "; printContainer(mainChain););
+        size_t insertedAt = binaryInsert( pending[index], mainChain, limits[index]);
+
+        for (size_t i = 0; i < limits.size(); i++)
+        {
+            if (i != index && limits[i] >= insertedAt)
+                limits[i]++;
+        }
+        DBG(std::cout << "JacobSthal index[" << index + 1 << "]: ";
+                std::cout << RED;
+                std::cout << pending[index];
+                std::cout << RESET << " -> ";
+                printContainer(mainChain););
     }
 
     if (isOdd)
     {
-        binaryInsert(unpaired, mainChain);
-        DBG(std::cout << "unpaired: "; printContainer(mainChain););
+        binaryInsert( unpaired, mainChain, mainChain.size());
+        DBG(std::cout << "unpaired: ";
+                std::cout << RED;
+                std::cout << unpaired;
+                std::cout << RESET << " -> ";
+                printContainer(mainChain););
     }
     return mainChain;
 }
@@ -212,7 +252,7 @@ std::deque<std::pair<unsigned int, unsigned int>>   PmergeMe::pairsSwap(std::deq
     return pairs;
 }
 
-std::deque<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::deque<std::pair<unsigned int, unsigned int>> pairs)
+std::deque<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(const std::deque<std::pair<unsigned int, unsigned int>> &pairs)
 {
     if (pairs.size() <= 1)
         return pairs;
@@ -220,15 +260,16 @@ std::deque<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::deque
     std::deque<std::pair<unsigned int, unsigned int>> winners;
     std::deque<std::pair<unsigned int, unsigned int>> losers;
 
-    bool isOdd = pairs.size() % 2;
+    size_t size = pairs.size();
+    bool isOdd = size % 2;
     std::pair<unsigned int, unsigned int>  unpaired; 
 
-    if (isOdd){
+    if (isOdd)
+    {
         unpaired = pairs.back();
-        pairs.pop_back();
+        size--;   // ignore last element
     }
-
-    for (size_t i = 0; i < pairs.size(); i +=2)
+    for (size_t i = 0; i < size; i +=2)
     {
         if (pairs[i].first > pairs[i + 1].first)
         {
@@ -246,19 +287,27 @@ std::deque<std::pair<unsigned int, unsigned int>> PmergeMe::sortPairs(std::deque
     DBG(std::cout << "losers: "; printPairs(losers););
 
     winners = sortPairs(winners);
+
     std::deque<std::pair<unsigned int, unsigned int>> result;
     result.push_back(winners[0]);
+
     for (size_t i = 1; i < winners.size(); i++)
         result.push_back(winners[i]);
     for (size_t i = 0; i < losers.size(); i++)
     {
         binaryInsertPairs(losers[i], result);
-        DBG(std::cout << "inserting[" << i << "]: "; printPairs(result););
+        DBG(std::cout << "inserting " << RED;
+                printPair(losers[i]);
+                std::cout << RESET << " -> ";
+                printPairs(result););
     }	
     if (isOdd)
     {
         binaryInsertPairs(unpaired, result);
-        DBG(std::cout << "unpaired: "; printPairs(result););
+        DBG(std::cout << "unpaired " << RED;
+                printPair(unpaired);
+                std::cout << RESET << " -> ";
+                printPairs(result););
     }
     return result;
 }
@@ -274,6 +323,7 @@ std::deque<unsigned int> PmergeMe::fordJohnson(std::deque<unsigned int>& deque)
         unpaired = deque.back();
         deque.pop_back();
     }
+    DBG(std::cout << RED << "\n--- Starting deque ---" << RESET << std::endl);
     std::deque<std::pair<unsigned int, unsigned int>> pairs;
     DBG(std::cout << "Starting to swap inner pairs." << std::endl;);
     pairs = pairsSwap(deque);
@@ -285,15 +335,20 @@ std::deque<unsigned int> PmergeMe::fordJohnson(std::deque<unsigned int>& deque)
 
     std::deque<unsigned int> mainChain;
     std::deque<unsigned int> pending;
+    std::deque<size_t> limits;
 
     mainChain.push_back(sortedPairs[0].second);
-    for (const auto& pair: sortedPairs){
-        mainChain.push_back(pair.first);
-        pending.push_back(pair.second);
-    }
 
-    // Remove the first pending item because b1 is already inserted
-    pending.erase(pending.begin());
+    for (size_t i = 0; i < sortedPairs.size(); i++)
+    {
+        mainChain.push_back(sortedPairs[i].first);
+
+        if (i > 0)
+        {
+            pending.push_back(sortedPairs[i].second);
+            limits.push_back(i + 1);
+        }
+    }
 
     DBG(std::cout << "mainChain: "; printContainer(mainChain););
     DBG(std::cout << "pending: "; printContainer(pending););
@@ -301,13 +356,28 @@ std::deque<unsigned int> PmergeMe::fordJohnson(std::deque<unsigned int>& deque)
     std::vector<size_t> insertionOrder = generateJacobsthal(pending.size());
     for (size_t index : insertionOrder)
     {
-        binaryInsert(pending[index], mainChain);
-        DBG(std::cout << "JacobSthal index[" << index + 1 << "]: "; printContainer(mainChain););
+        size_t insertedAt = binaryInsert( pending[index], mainChain, limits[index]);
+
+        for (size_t i = 0; i < limits.size(); i++)
+        {
+            if (i != index && limits[i] >= insertedAt)
+                limits[i]++;
+        }
+        DBG(std::cout << "JacobSthal index[" << index + 1 << "]: ";
+                std::cout << RED;
+                std::cout << pending[index];
+                std::cout << RESET << " -> ";
+                printContainer(mainChain););
     }
+
     if (isOdd)
     {
-        binaryInsert(unpaired, mainChain);
-        DBG(std::cout << "unpaired: "; printContainer(mainChain););
+        binaryInsert( unpaired, mainChain, mainChain.size());
+        DBG(std::cout << "unpaired: ";
+                std::cout << RED;
+                std::cout << unpaired;
+                std::cout << RESET << " -> ";
+                printContainer(mainChain););
     }
     return mainChain;
 }

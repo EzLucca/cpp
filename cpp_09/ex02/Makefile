@@ -1,5 +1,5 @@
 C++       	:= c++
-CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror
+CFLAGS 	 	:= -std=c++20 -Wall -Wextra -Werror -O2 -g
 
 NAME     	:= PmergeMe 
 
@@ -16,11 +16,11 @@ INCLUDES 	:= -I$(INC_DIR)
 
 all: $(NAME)
 
-debug: CFLAGS += -DDEBUG
+debug: CFLAGS += -DDEBUG -pg
 debug: re
 
 $(NAME): $(OBJ)
-	@$(C++) $(OBJ) -o $@
+	@$(C++) $(CFLAGS) $(OBJ) -o $@
 	@echo "Build $(NAME) successfully!"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)

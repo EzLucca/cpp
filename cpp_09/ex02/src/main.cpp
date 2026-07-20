@@ -12,14 +12,17 @@ int main (int argc, char **argv)
 	std::deque<unsigned int> sequenceDeq;
     std::chrono::nanoseconds timeVec;
 	std::chrono::nanoseconds timeDeq;
-    PmergeMe    fJ;
+    PmergeMe    solve;
 
-    if(!fJ.isPositiveInteger(argc, argv, sequence, sequenceDeq))
+    if(!solve.isPositiveInteger(argc, argv, sequence, sequenceDeq))
+    {
+        std::cerr << "Invalid integer" << std::endl;
         exit(1);
+    }
 
-    timeVec = fJ.sortVector(sequence);
-    timeDeq = fJ.sortDeque(sequenceDeq);
+    timeVec = solve.sortVector(sequence);
+    timeDeq = solve.sortDeque(sequenceDeq);
 
-    fJ.printResults(sequence, timeVec, timeDeq);
+    solve.printResults(sequence, timeVec, timeDeq);
     return 0;
 }
