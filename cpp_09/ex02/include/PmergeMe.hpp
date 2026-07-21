@@ -38,14 +38,8 @@ class PmergeMe
                 std::chrono::nanoseconds timeVec,
                 std::chrono::nanoseconds timeDeq);
 
-        void printPair(const std::pair<unsigned int, unsigned int>& p);
-
         std::vector<std::pair<unsigned int, unsigned int>>  pairsSwap(std::vector<unsigned int>& vector);
-        std::vector<std::pair<unsigned int, unsigned int>>  sortPairs(const std::vector<std::pair<unsigned int, unsigned int>> &pairs);
-
-
         std::deque<std::pair<unsigned int, unsigned int>>   pairsSwap(std::deque<unsigned int>& deque);
-        std::deque<std::pair<unsigned int, unsigned int>>   sortPairs(const std::deque<std::pair<unsigned int, unsigned int>> &pairs);
 
         std::vector<unsigned int> getVector();
         std::deque<unsigned int> getDeque();
@@ -64,6 +58,15 @@ class PmergeMe
 
         template <typename Container>
             void printContainer(const Container& container);
+
 };
+
+struct Pending
+{
+    unsigned int value;  // b_i
+    unsigned int limit;  // a_i value
+};
+
+std::ostream& operator<<(std::ostream& os, const Pending& p);
 
 #include "PmergeMe.tpp"
