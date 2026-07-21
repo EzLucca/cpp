@@ -19,7 +19,7 @@ std::chrono::nanoseconds PmergeMe::sortDeque(std::deque<unsigned int> &input)
     return stop - start;
 }
 
-bool PmergeMe::isPositiveInteger(int argc, char **argv,
+bool PmergeMe::isUnsignedInteger(int argc, char **argv,
         std::vector<unsigned int> &sequence,
         std::deque<unsigned int> &sequenceDeq)
 {
@@ -32,8 +32,7 @@ bool PmergeMe::isPositiveInteger(int argc, char **argv,
 
         unsigned int value{};
         // from_chars return pointer and error
-        auto [ptr, errorcode] =
-            std::from_chars(sv.data(), sv.data() + sv.size(), value);
+        auto [ptr, errorcode] = std::from_chars(sv.data(), sv.data() + sv.size(), value);
 
         if (errorcode != std::errc{} || ptr != sv.data() + sv.size())
         {
@@ -48,7 +47,7 @@ bool PmergeMe::isPositiveInteger(int argc, char **argv,
     std::vector<std::pair<unsigned int, unsigned int>>
 PmergeMe::pairsSwap(std::vector<unsigned int> &vector)
 {
-    DBG(printContainer(vector));
+    DBG(std::cout << "Vector:\t"; printContainer(vector));
     std::vector<std::pair<unsigned int, unsigned int>> pairs;
     for (size_t i = 0; i + 1 < vector.size(); i += 2)
     {
@@ -57,7 +56,7 @@ PmergeMe::pairsSwap(std::vector<unsigned int> &vector)
         else
             pairs.emplace_back(vector[i], vector[i + 1]);
     }
-    DBG(printPairs(pairs));
+    DBG(std::cout << "Pairs:\t"; printPairs(pairs));
     return pairs;
 }
 
@@ -94,8 +93,9 @@ PmergeMe::fordJohnson(std::vector<unsigned int> &vector)
 
     // Recursively sort winners
     mainChain = fordJohnson(mainChain);
-    DBG(std::cout << "mainChain: "; printContainer(mainChain););
-    DBG(std::cout << "pending: "; printContainer(pending););
+    DBG(std::cout << RED << "\n--- Continuing Vector ---" << RESET << std::endl);
+    DBG(std::cout << "MainChain:\t"; printContainer(mainChain););
+    DBG(std::cout << "Pending:\t"; printContainer(pending););
 
     // Insert losers
     std::vector<size_t> order = generateJacobsthal(pending.size());
@@ -126,7 +126,7 @@ PmergeMe::fordJohnson(std::vector<unsigned int> &vector)
     if (isOdd)
     {
         binaryInsert(odd, mainChain, mainChain.size());
-        DBG(std::cout << "unpaired: "; std::cout << RED; std::cout << odd;
+        DBG(std::cout << "Unpaired: "; std::cout << RED; std::cout << odd;
                 std::cout << RESET << " -> "; printContainer(mainChain););
     }
 
@@ -175,7 +175,7 @@ std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
 std::deque<std::pair<unsigned int, unsigned int>>
 PmergeMe::pairsSwap(std::deque<unsigned int> &deque)
 {
-    DBG(printContainer(deque));
+    DBG(std::cout << "Deque:\t"; printContainer(deque));
     std::deque<std::pair<unsigned int, unsigned int>> pairs;
     for (size_t i = 0; i + 1 < deque.size(); i += 2)
     {
@@ -184,7 +184,7 @@ PmergeMe::pairsSwap(std::deque<unsigned int> &deque)
         else
             pairs.emplace_back(deque[i], deque[i + 1]);
     }
-    DBG(printPairs(pairs));
+    DBG(std::cout << "Pairs:\t"; printPairs(pairs));
     return pairs;
 }
 
@@ -220,8 +220,8 @@ PmergeMe::fordJohnson(std::deque<unsigned int> &deque)
 
 
     mainChain = fordJohnson(mainChain);
-    DBG(std::cout << "mainChain: "; printContainer(mainChain););
-    DBG(std::cout << "pending: "; printContainer(pending););
+    DBG(std::cout << "MainChain:\t"; printContainer(mainChain););
+    DBG(std::cout << "Pending:\t"; printContainer(pending););
 
     std::vector<size_t> insertionOrder = generateJacobsthal(pending.size());
     for (size_t index : insertionOrder) 
@@ -249,7 +249,7 @@ PmergeMe::fordJohnson(std::deque<unsigned int> &deque)
     if (isOdd)
     {
         binaryInsert(odd, mainChain, mainChain.size());
-        DBG(std::cout << "unpaired: "; std::cout << RED; std::cout << odd;
+        DBG(std::cout << "Unpaired: "; std::cout << RED; std::cout << odd;
                 std::cout << RESET << " -> "; printContainer(mainChain););
     }
 
@@ -292,6 +292,6 @@ void PmergeMe::printResults(std::vector<unsigned int> sequence,
 
 std::ostream& operator<<(std::ostream& os, const Pending& p)
 {
-    os << "(" << p.value << " -> " << p.limit << ")";
+    os << "(" << p.value << " , " << p.limit << ")";
     return os;
 }

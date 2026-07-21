@@ -9,19 +9,26 @@ int main (int argc, char **argv)
     }
 
     std::vector<unsigned int> sequence;
-	std::deque<unsigned int> sequenceDeq;
+    std::deque<unsigned int> sequenceDeq;
     std::chrono::nanoseconds timeVec;
-	std::chrono::nanoseconds timeDeq;
+    std::chrono::nanoseconds timeDeq;
     PmergeMe    solve;
 
-    if(!solve.isPositiveInteger(argc, argv, sequence, sequenceDeq))
+    try 
     {
-        std::cerr << "Invalid integer" << std::endl;
-        exit(1);
-    }
+        if(!solve.isUnsignedInteger(argc, argv, sequence, sequenceDeq))
+        {
+            std::cerr << "Invalid integer" << std::endl;
+            exit(1);
+        }
 
-    timeVec = solve.sortVector(sequence);
-    timeDeq = solve.sortDeque(sequenceDeq);
+        timeVec = solve.sortVector(sequence);
+        timeDeq = solve.sortDeque(sequenceDeq);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
     solve.printResults(sequence, timeVec, timeDeq);
     return 0;

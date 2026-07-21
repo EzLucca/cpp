@@ -16,7 +16,7 @@ INCLUDES 	:= -I$(INC_DIR)
 
 all: $(NAME)
 
-debug: CFLAGS += -DDEBUG -pg
+debug: CFLAGS += -DDEBUG
 debug: re
 
 $(NAME): $(OBJ)

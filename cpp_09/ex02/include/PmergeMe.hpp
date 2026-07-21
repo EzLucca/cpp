@@ -31,7 +31,7 @@ class PmergeMe
         std::chrono::nanoseconds sortVector(std::vector<unsigned int>& input);
         std::chrono::nanoseconds sortDeque(std::deque<unsigned int>& input);
 
-        bool isPositiveInteger(int argc, char** argv,
+        bool isUnsignedInteger(int argc, char** argv,
                 std::vector<unsigned int>& sequence,
                 std::deque<unsigned int>& sequenceDeq);
         void    printResults(std::vector<unsigned int> sequence,
@@ -48,10 +48,6 @@ class PmergeMe
         template <typename Container>
             size_t binaryInsert( typename Container::value_type value, Container& container,
                     size_t limit);
-
-        template <typename Container>
-            static void binaryInsertPairs( const typename Container::value_type& pair,
-                    Container& container);
 
         template <typename Container>
             void printPairs(const Container& pairs);
