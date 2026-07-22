@@ -117,6 +117,10 @@ bool BitcoinExchange::loadDataBase(const std::string& filename)
 
 void BitcoinExchange::processInput(const std::string& filename) 
 {
+    if (filename.size() < 4 || filename.substr(filename.size() - 4) != ".txt")
+    {
+        std::cerr << "Error: Filename should be input.txt" << std::endl;
+    }
     std::ifstream file(filename.c_str());
     if (!file.is_open()) {
         std::cerr << "Error: could not open file." << std::endl;
