@@ -146,6 +146,7 @@ std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
         jacobsthal.emplace_back(jacobsthal.back() +
                 2 * jacobsthal[jacobsthal.size() - 2]);
     }
+    DBG(std::cout << RED << "Jacobs order: "; printContainer(jacobsthal); std::cout << RESET;);
     std::vector<bool> added(size, false);
     insertionOrder.emplace_back(0);
     added[0] = true;
@@ -169,6 +170,7 @@ std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
         if (!added[i])
             insertionOrder.emplace_back(i);
     }
+    DBG(std::cout << RED << "Insertion order: "; printContainer(insertionOrder); std::cout << RESET;);
     return insertionOrder;
 }
 
